@@ -1,0 +1,7 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Часы — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;text-align:center;padding:40px 16px}a{color:#a78bfa}
+#t{font-size:48px;font-variant-numeric:tabular-nums} #d{color:#8b95a8;margin-top:8px}</style></head><body>
+<p><a href="/">← Hub</a></p><div id="t"></div><div id="d"></div>
+<script>setInterval(()=>{const n=new Date();t.textContent=n.toLocaleTimeString('ru-RU');d.textContent=n.toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long',year:'numeric'})},200)</script>
+</body></html>

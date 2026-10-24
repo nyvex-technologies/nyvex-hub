@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Hub</title>
+<meta name="theme-color" content="#8b5cf6">
+<style>
+:root{--bg:#070b14;--card:#101827;--line:#ffffff14;--accent:#8b5cf6;--text:#eef2ff;--muted:#8b95a8}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(800px 400px at 0% 0%,#8b5cf630,transparent),radial-gradient(600px 300px at 100% 0%,#06b6d420,transparent),var(--bg)}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 56px}
+h1{margin:0 0 4px;font-size:1.85rem}
+.sub{color:var(--muted);margin:0 0 20px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-size:.9rem;border:1px solid transparent}
+nav a:hover{color:#fff;background:#ffffff10;border-color:var(--line)}
+.sec{margin:28px 0 12px;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.card h3{margin:0;font-size:1rem}
+.card p{margin:0;color:var(--muted);font-size:.85rem;flex:1}
+a.btn{display:inline-block;text-align:center;text-decoration:none;background:var(--accent);color:#fff;padding:10px 12px;border-radius:11px;font-weight:700;font-size:.88rem}
+a.btn.alt{background:#ffffff12}
+footer{margin-top:36px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+footer a{color:#c4b5fd}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="wrap">
+<h1>Nyvex Hub</h1>
+<p class="sub">Nyvex Technologies · Official Black Fox · игры, программы, утилиты</p>
+<nav>
+  <a href="#games">Игры</a>
+  <a href="#apps">Программы</a>
+  <a href="#utils">Утилиты</a>
+  <a href="#online">Онлайн</a>
+  <a href="download.html">Браузер</a>
+</nav>
+
+<p class="sec" id="online">Онлайн-проекты</p>
+<div class="grid">
+  <div class="card">
+    <h3>🎮 Nyvex Clicker</h3>
+    <p>Telegram Mini App с сохранениями</p>
+    <a class="btn" href="https://t.me/NyvexClickerBot">Бот</a>
+    <a class="btn alt" href="https://sociology-authorization-herein-male.trycloudflare.com">Web</a>
+  </div>
+  <div class="card">
+    <h3>💬 NyvexChat</h3>
+    <p>Чаты и профиль (нужен туннель :8001)</p>
+    <a class="btn" href="https://restructuring-outer-lines-advanced.trycloudflare.com">Открыть</a>
+  </div>
+</div>
+
+<p class="sec" id="games">Игры</p>
+<div class="grid">
+  <div class="card"><h3>💣 Сапёр</h3><p>Классика с уровнями</p><a class="btn" href="games/minesweeper.html">Играть</a></div>
+  <div class="card"><h3>🀄️ Маджонг</h3><p>Поиск пар</p><a class="btn" href="games/mahjong.html">Играть</a></div>
+  <div class="card"><h3>🟦 2048</h3><p>Сложи плитки</p><a class="btn" href="games/2048.html">Играть</a></div>
+  <div class="card"><h3>🐍 Змейка</h3><p>Управление стрелками / свайп</p><a class="btn" href="games/snake.html">Играть</a></div>
+  <div class="card"><h3>🧱 Тетрис</h3><p>Классика</p><a class="btn" href="games/tetris.html">Играть</a></div>
+  <div class="card"><h3>☄️ Метеориты</h3><p>Кликай падающие метеоры</p><a class="btn" href="games/meteor.html">Играть</a></div>
+  <div class="card"><h3>🏁 Гонки</h3><p>Уклоняйся от машин</p><a class="btn" href="games/race.html">Играть</a></div>
+  <div class="card"><h3>❌ Крестики-нолики</h3><p>1 на 1 с ботом</p><a class="btn" href="games/tictactoe.html">Играть</a></div>
+</div>
+
+<p class="sec" id="apps">Программы</p>
+<div class="grid">
+  <div class="card"><h3>📝 Заметки</h3><p>Блокнот в браузере</p><a class="btn" href="apps/notes.html">Открыть</a></div>
+  <div class="card"><h3>✅ To-Do</h3><p>Список дел</p><a class="btn" href="apps/todo.html">Открыть</a></div>
+  <div class="card"><h3>⏱️ Таймер</h3><p>Секундомер и таймер</p><a class="btn" href="apps/timer.html">Открыть</a></div>
+  <div class="card"><h3>🎨 Рисовалка</h3><p>Простой canvas</p><a class="btn" href="apps/paint.html">Открыть</a></div>
+</div>
+
+<p class="sec" id="utils">Утилиты</p>
+<div class="grid">
+  <div class="card"><h3>🧮 Калькулятор</h3><p>Базовые операции</p><a class="btn" href="utils/calc.html">Открыть</a></div>
+  <div class="card"><h3>🔐 Пароль</h3><p>Генератор паролей</p><a class="btn" href="utils/password.html">Открыть</a></div>
+  <div class="card"><h3>🎲 Рандом</h3><p>Случайное число / монетка</p><a class="btn" href="utils/random.html">Открыть</a></div>
+  <div class="card"><h3>🔤 Текст</h3><p>Счётчик символов, регистр</p><a class="btn" href="utils/text.html">Открыть</a></div>
+  <div class="card"><h3>🕐 Время</h3><p>Часы и дата</p><a class="btn" href="utils/clock.html">Открыть</a></div>
+  <div class="card"><h3>💱 Base64</h3><p>Кодировать / декодировать</p><a class="btn" href="utils/base64.html">Открыть</a></div>
+</div>
+
+<footer>
+  <p><b>Nyvex Technologies</b> · Official Black Fox</p>
+  <p><a href="mailto:nyvex.technologies@gmail.com">nyvex.technologies@gmail.com</a> ·
+  <a href="https://t.me/NyvexClickerBot">@NyvexClickerBot</a></p>
+</footer>
+</div>
+</body>
+</html>

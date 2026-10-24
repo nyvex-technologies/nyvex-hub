@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Hub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="badge">Без рекламы · прямые загрузки</div>
+  <h1 class="logo">NYVEX <span>HUB</span></h1>
+  <p class="tagline">Боты, игры, программы, утилиты, музыка и книги — каждый раздел отдельно.</p>
+</header>
+
+<nav class="nav wrap">
+  <a href="#bots">🤖 Боты</a>
+  <a href="#games">🎮 Игры</a>
+  <a href="#programs">💻 Программы</a>
+  <a href="#utils">🛠️ Утилиты</a>
+  <a href="#music">🎵 Музыка</a>
+  <a href="#books">📖 Книги</a>
+  <a href="#soon">⏳ Скоро</a>
+</nav>
+
+<main class="wrap">
+
+  <!-- BOTS -->
+  <section class="section" id="bots">
+    <div class="section-head"><h2>🤖 Боты</h2><div class="line"></div></div>
+    <p class="section-desc">Telegram-боты и Mini Apps. Открываются в Telegram, не скачиваются как файлы.</p>
+    <div class="grid">
+      <article class="card wide">
+        <div class="top"><div class="icon">🦊</div><span class="pill bot">BOT</span></div>
+        <h3>Nyvex Clicker / Universe</h3>
+        <p>Главный бот: кликер, облачные сохранения, события августа и сентября, ранги и питомцы.</p>
+        <div class="meta"><span class="chip">Telegram</span><span class="chip">Mini App</span><span class="chip">Online</span></div>
+        <div class="actions">
+          <a class="btn blue" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Открыть бота</a>
+          <a class="btn sec" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Играть</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section class="section" id="games">
+    <div class="section-head"><h2>🎮 Игры</h2><div class="line"></div></div>
+    <p class="section-desc">Игры и демо для скачивания (PC/Web). Не путать с ботами.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">☄️</div><span class="pill game">GAME</span></div>
+        <h3>Meteor Blaster</h3>
+        <p>Сбивай падающие метеориты тапами. 3 жизни, рекорд сохраняется в браузере.</p>
+        <div class="meta"><span class="chip">Web</span><span class="chip">HTML5</span></div>
+        <div class="actions">
+          <a class="btn" href="files/games/meteor-blaster.html" target="_blank">Играть</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="section" id="programs">
+    <div class="section-head"><h2>💻 Программы</h2><div class="line"></div></div>
+    <p class="section-desc">Полноценный софт: установщики, ZIP-приложения, клиенты.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">📝</div><span class="pill prog">APP</span></div>
+        <h3>Nyvex Notes</h3>
+        <p>Блокнот: заметки, поиск, экспорт JSON.</p>
+        <div class="meta"><span class="chip">Web</span></div>
+        <div class="actions"><a class="btn cyan" href="files/programs/notes.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🧮</div><span class="pill prog">APP</span></div>
+        <h3>Калькулятор</h3>
+        <p>Базовые операции.</p>
+        <div class="meta"><span class="chip">Web</span></div>
+        <div class="actions"><a class="btn cyan" href="files/programs/calculator.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">⏱️</div><span class="pill prog">APP</span></div>
+        <h3>Таймер</h3>
+        <p>Таймер и секундомер.</p>
+        <div class="meta"><span class="chip">Web</span></div>
+        <div class="actions"><a class="btn cyan" href="files/programs/timer.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🔐</div><span class="pill prog">APP</span></div>
+        <h3>Генератор паролей</h3>
+        <p>Случайные пароли, копирование.</p>
+        <div class="meta"><span class="chip">Web</span></div>
+        <div class="actions"><a class="btn cyan" href="files/programs/passgen.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">📐</div><span class="pill prog">APP</span></div>
+        <h3>Конвертер</h3>
+        <p>Длина, вес, температура.</p>
+        <div class="meta"><span class="chip">Web</span></div>
+        <div class="actions"><a class="btn cyan" href="files/programs/convert.html" target="_blank">Открыть</a></div>
+      </article>
+</div>
+  </section>
+
+  <!-- UTILS -->
+  <section class="section" id="utils">
+    <div class="section-head"><h2>🛠️ Утилиты</h2><div class="line"></div></div>
+    <p class="section-desc">Мелкие инструменты и скрипты — не полноценные программы.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">⚙️</div><span class="pill util">UTIL</span></div>
+        <h3>Packager / Tool</h3>
+        <p>Упаковка и вспомогательные скрипты. <code>files/programs/tool.zip</code>.</p>
+        <div class="meta"><span class="chip">Linux</span><span class="chip">Script</span></div>
+        <div class="actions"><a class="btn gold" href="files/programs/tool.zip" download>Скачать</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <section class="section" id="music">
+    <div class="section-head"><h2>🎵 Музыка</h2><div class="line"></div></div>
+    <p class="section-desc">Мои треки: слушать на сайте и скачивать MP3/ZIP без рекламы.</p>
+    <div class="grid">
+      <article class="card wide">
+        <div class="top"><div class="icon">🎧</div><span class="pill music">MUSIC</span></div>
+        <h3>Official Black Fox Music</h3>
+        <p>Подставь свои mp3 в <code>files/music/</code> и названия треков ниже.</p>
+        <div class="tracks">
+          <div class="track"><b>01</b><span>Track One</span><a href="files/music/track-one.mp3" download>Скачать</a></div>
+          <div class="track"><b>02</b><span>Track Two</span><a href="files/music/track-two.mp3" download>Скачать</a></div>
+          <div class="track"><b>03</b><span>Track Three</span><a href="files/music/track-three.mp3" download>Скачать</a></div>
+        </div>
+        <audio controls preload="none"><source src="files/music/track-one.mp3" type="audio/mpeg"></audio>
+        <div class="actions"><a class="btn" href="files/music/album.zip" download>Скачать альбом (ZIP)</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🌙</div><span class="pill music">SINGLE</span></div>
+        <h3>Night Run</h3>
+        <p>Сингл. Файл: <code>files/music/night-run.mp3</code>.</p>
+        <audio controls preload="none"><source src="files/music/night-run.mp3" type="audio/mpeg"></audio>
+        <div class="actions"><a class="btn" href="files/music/night-run.mp3" download>Скачать MP3</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- BOOKS -->
+  <section class="section" id="books">
+    <div class="section-head"><h2>📖 Книги</h2><div class="line"></div></div>
+    <p class="section-desc">PDF, EPUB, рассказы и гайды. Готовые файлы — сюда; анонсы — в «Скоро».</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">📖</div><span class="pill book">BOOK</span></div>
+        <h3>Пример книги</h3>
+        <p>Положи PDF в <code>files/books/</code>.</p>
+        <div class="meta"><span class="chip">PDF</span></div>
+        <div class="actions">
+          <a class="btn" href="files/books/example.pdf" download>PDF</a>
+          <a class="btn sec" href="files/books/example.epub" download>EPUB</a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">📝</div><span class="pill book">STORY</span></div>
+        <h3>Короткий рассказ</h3>
+        <p>Один файл — прямая загрузка.</p>
+        <div class="actions"><a class="btn" href="files/books/story.pdf" download>Скачать</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SOON -->
+  <section class="section" id="soon">
+    <div class="section-head"><h2>⏳ Скоро</h2><div class="line"></div></div>
+    <p class="section-desc">Анонсы без файлов. Когда готово — переносим в нужный раздел.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">🎃</div><span class="pill soon">SOON</span></div>
+        <h3>Halloween World</h3>
+        <p>Октябрьский ивент Nyvex Universe.</p>
+        <div class="actions"><a class="btn off" href="#">В разработке</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">📚</div><span class="pill soon">SOON</span></div>
+        <h3>Новая книга</h3>
+        <p>Анонс. После PDF → раздел «Книги».</p>
+        <div class="actions"><a class="btn off" href="#">Скоро</a></div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p><strong>Nyvex Hub</strong> · боты · игры · софт · музыка · книги</p>
+  <p style="margin-top:8px"><a href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">@NyvexClickerBot</a></p>
+</footer>
+</body>
+</html>

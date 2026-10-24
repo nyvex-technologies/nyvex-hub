@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Minesweeper</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:14px system-ui;display:grid;place-items:center;min-height:100vh}
+.wrap{text-align:center;padding:16px}
+h1{margin:0 0 8px;font-size:22px} .sub{color:#8b94a8;margin-bottom:12px}
+.bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+button,select{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;background:#1a2033;color:#fff}
+button.go{background:linear-gradient(135deg,#8d5cff,#6b3fd4)}
+#grid{display:inline-grid;gap:3px;background:#0e1220;padding:8px;border-radius:12px;border:1px solid rgba(141,92,255,.25)}
+.cell{width:28px;height:28px;border-radius:6px;background:#1a2033;font-weight:900;font-size:13px;display:grid;place-items:center;cursor:pointer;user-select:none}
+.cell.open{background:#121726}
+.cell.mine{background:#ff6275}
+.cell.flag{background:#3d2a12;color:#ffc857}
+.info{margin-top:10px;color:#c4b0ff;font-weight:800}
+</style></head><body>
+<div class="wrap">
+  <h1>💣 Сапёр</h1>
+  <div class="sub">ЛКМ — открыть · ПКМ — флаг</div>
+  <div class="bar">
+    <select id="diff">
+      <option value="9,9,10">Лёгкий 9×9</option>
+      <option value="16,16,40" selected>Средний 16×16</option>
+      <option value="16,30,99">Сложный 16×30</option>
+    </select>
+    <button class="go" id="new">Новая игра</button>
+  </div>
+  <div id="grid"></div>
+  <div class="info" id="info">Мины: 40</div>
+</div>
+<script>
+let R,C,M,board,open,flag,dead,won,left;
+const grid=document.getElementById('grid'),info=document.getElementById('info');
+function parse(){const [r,c,m]=document.getElementById('diff').value.split(',').map(Number);return{r,c,m}}
+function idx(y,x){return y*C+x}
+function neighbors(y,x){
+  const a=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+    if(!dy&&!dx)continue;const ny=y+dy,nx=x+dx;
+    if(ny>=0&&ny<R&&nx>=0&&nx<C)a.push([ny,nx]);
+  }return a;
+}
+function start(){
+  ({r:R,c:C,m:M}=parse());
+  board=Array(R*C).fill(0);open=Array(R*C).fill(false);flag=Array(R*C).fill(false);
+  dead=won=false;left=R*C-M;
+  // mines
+  let placed=0;while(placed<M){const i=Math.floor(Math.random()*R*C);if(board[i]!==-1){board[i]=-1;placed++}}
+  for(let y=0;y<R;y++)for(let x=0;x<C;x++)if(board[idx(y,x)]!==-1){
+    board[idx(y,x)]=neighbors(y,x).filter(([ny,nx])=>board[idx(ny,nx)]===-1).length;
+  }
+  render();info.textContent=`Мины: ${M}`;
+}
+function flood(y,x){
+  const st=[[y,x]];
+  while(st.length){
+    const [cy,cx]=st.pop();const i=idx(cy,cx);
+    if(open[i]||flag[i])continue;open[i]=true;left--;
+    if(board[i]===0)neighbors(cy,cx).forEach(([ny,nx])=>{if(!open[idx(ny,nx)])st.push([ny,nx])});
+  }
+}
+function render(){
+  grid.style.gridTemplateColumns=`repeat(${C},28px)`;
+  grid.innerHTML='';
+  for(let y=0;y<R;y++)for(let x=0;x<C;x++){
+    const i=idx(y,x),el=document.createElement('div');el.className='cell';
+    if(flag[i]){el.classList.add('flag');el.textContent='🚩'}
+    else if(open[i]){
+      el.classList.add('open');
+      if(board[i]===-1){el.classList.add('mine');el.textContent='💣'}
+      else if(board[i]>0){el.textContent=board[i];el.style.color=['','#60a5fa','#4ade80','#f87171','#c084fc','#fbbf24','#22d3ee','#e879f9','#a3a3a3'][board[i]]}
+    }
+    el.oncontextmenu=e=>{e.preventDefault();if(dead||won||open[i])return;flag[i]=!flag[i];render()};
+    el.onclick=()=>{
+      if(dead||won||flag[i]||open[i])return;
+      if(board[i]===-1){dead=true;open.forEach((_,j)=>open[j]=true);info.textContent='💥 Проигрыш';render();return}
+      flood(y,x);if(left<=0){won=true;info.textContent='🏆 Победа!'}render();
+    };
+    grid.appendChild(el);
+  }
+}
+document.getElementById('new').onclick=start;start();
+</script></body></html>

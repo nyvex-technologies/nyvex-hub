@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Маджонг — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;text-align:center;padding:12px}a{color:#a78bfa}
+#g{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:420px;margin:12px auto}
+.t{width:52px;height:64px;border-radius:10px;border:2px solid #334;background:#1a2438;font-size:28px;cursor:pointer}
+.t.on{border-color:#8b5cf6;background:#2a1a4a} .t.gone{visibility:hidden}
+</style></head><body>
+<p><a href="/">← Hub</a></p><h1>🀄️ Маджонг (пары)</h1><p id="m">Найди пары</p><div id="g"></div>
+<script>
+const I=['🌸','🪷','🍀','⭐','🌙','🔥','💎','🎵','🦊','⚡','🌊','🍇'];
+let cards=[...I,...I].sort(()=>Math.random()-0.5),sel=[],lock=false;
+const g=document.getElementById('g');
+cards.forEach((ic,i)=>{const b=document.createElement('button');b.className='t';b.dataset.v=ic;b.onclick=()=>{
+  if(lock||b.classList.contains('gone')||b.classList.contains('on'))return;b.textContent=ic;b.classList.add('on');sel.push(b);
+  if(sel.length==2){lock=true;setTimeout(()=>{if(sel[0].dataset.v==sel[1].dataset.v){sel.forEach(x=>x.classList.add('gone'));if([...g.children].every(x=>x.classList.contains('gone')))document.getElementById('m').textContent='Победа!'}
+  else sel.forEach(x=>{x.textContent='';x.classList.remove('on')});sel=[];lock=false},400)}};g.appendChild(b)});
+</script></body></html>

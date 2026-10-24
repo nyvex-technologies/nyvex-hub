@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Random</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:15px system-ui}
+.box{width:min(400px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:22px}
+h1{margin:0 0 14px;font-size:18px;color:#c4b0ff}
+label{display:block;color:#9aa3b8;font-size:12px;margin:10px 0 4px}
+input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#0b0e18;color:#fff;font:14px system-ui}
+button{margin-top:12px;width:100%;border:0;border-radius:12px;padding:12px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+#out{margin-top:14px;padding:14px;border-radius:12px;background:#0e1220;font-size:22px;font-weight:900;text-align:center;color:#c4b0ff;min-height:48px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+</style></head><body>
+<div class="box">
+  <h1>🎲 Random</h1>
+  <div class="row">
+    <div><label>От</label><input id="a" type="number" value="1"></div>
+    <div><label>До</label><input id="b" type="number" value="100"></div>
+  </div>
+  <button id="num">Случайное число</button>
+  <button id="coin" style="background:#1a2033;margin-top:8px">Монетка</button>
+  <button id="dice" style="background:#1a2033;margin-top:8px">Кубик 1–6</button>
+  <label>Список (по строке) — выбрать одно</label>
+  <textarea id="list" rows="4" placeholder="Вариант A&#10;Вариант B&#10;Вариант C"></textarea>
+  <button id="pick" style="background:#1a2033">Выбрать из списка</button>
+  <div id="out">—</div>
+</div>
+<script>
+const out=document.getElementById('out');
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+document.getElementById('num').onclick=()=>{
+  let a=+document.getElementById('a').value,b=+document.getElementById('b').value;
+  if(a>b)[a,b]=[b,a];out.textContent=rnd(a,b);
+};
+document.getElementById('coin').onclick=()=>out.textContent=Math.random()<.5?'🦅 Орёл':'🪙 Решка';
+document.getElementById('dice').onclick=()=>out.textContent='🎲 '+rnd(1,6);
+document.getElementById('pick').onclick=()=>{
+  const lines=document.getElementById('list').value.split(/\n/).map(s=>s.trim()).filter(Boolean);
+  out.textContent=lines.length?lines[rnd(0,lines.length-1)]:'Список пуст';
+};
+</script></body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stopwatch</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:15px system-ui}
+.box{width:min(380px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:22px;text-align:center}
+#t{font-size:42px;font-weight:950;letter-spacing:2px;margin:12px 0 18px;color:#c4b0ff}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:900;cursor:pointer;background:#1a2033;color:#fff}
+button.go{background:linear-gradient(135deg,#8d5cff,#6b3fd4)}
+#laps{text-align:left;margin-top:16px;max-height:180px;overflow:auto;font-size:13px;color:#9aa3b8}
+#laps div{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+</style></head><body>
+<div class="box">
+  <div style="font-weight:900;color:#c4b0ff;letter-spacing:1px">STOPWATCH</div>
+  <div id="t">00:00.00</div>
+  <div class="row">
+    <button class="go" id="start">Старт</button>
+    <button id="lap">Круг</button>
+    <button id="reset">Сброс</button>
+  </div>
+  <div id="laps"></div>
+</div>
+<script>
+let running=false,t0=0,acc=0,timer=null,laps=[];
+const el=document.getElementById('t'),lapsEl=document.getElementById('laps');
+function fmt(ms){
+  const m=Math.floor(ms/60000),s=Math.floor((ms%60000)/1000),c=Math.floor((ms%1000)/10);
+  return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+String(c).padStart(2,'0');
+}
+function now(){return acc+(running?Date.now()-t0:0)}
+function tick(){el.textContent=fmt(now())}
+document.getElementById('start').onclick=()=>{
+  if(running){acc=now();running=false;clearInterval(timer);document.getElementById('start').textContent='Старт'}
+  else{t0=Date.now();running=true;timer=setInterval(tick,30);document.getElementById('start').textContent='Стоп'}
+};
+document.getElementById('lap').onclick=()=>{if(!running&&acc===0)return;laps.unshift(fmt(now()));lapsEl.innerHTML=laps.map((x,i)=>`<div>#${laps.length-i} — ${x}</div>`).join('')};
+document.getElementById('reset').onclick=()=>{running=false;clearInterval(timer);acc=0;laps=[];el.textContent='00:00.00';lapsEl.innerHTML='';document.getElementById('start').textContent='Старт'};
+</script></body></html>

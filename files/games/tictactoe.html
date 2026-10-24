@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tic-Tac-Toe</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:15px system-ui;min-height:100vh;display:grid;place-items:center}
+#b{display:grid;grid-template-columns:repeat(3,90px);gap:8px}
+.cell{width:90px;height:90px;border-radius:14px;background:#1a2033;border:2px solid rgba(141,92,255,.25);
+display:grid;place-items:center;font-size:36px;font-weight:900;cursor:pointer}
+#msg{margin:14px;font-weight:900;color:#c4b0ff;min-height:24px;text-align:center}
+button{border:0;border-radius:10px;padding:10px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+</style></head><body>
+<div style="text-align:center;padding:16px">
+  <h1>⭕ Крестики-нолики</h1>
+  <div id="msg">Ход: X</div>
+  <div id="b"></div>
+  <button id="new" style="margin-top:14px">Заново</button>
+</div>
+<script>
+let board,turn,over;
+const wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const b=document.getElementById('b'),msg=document.getElementById('msg');
+function start(){
+  board=Array(9).fill('');turn='X';over=false;msg.textContent='Ход: X';b.innerHTML='';
+  for(let i=0;i<9;i++){
+    const c=document.createElement('div');c.className='cell';
+    c.onclick=()=>{
+      if(over||board[i])return;board[i]=turn;c.textContent=turn;c.style.color=turn==='X'?'#c4b0ff':'#4fd1c5';
+      if(wins.some(w=>w.every(j=>board[j]===turn))){msg.textContent='Победа: '+turn;over=true;return}
+      if(board.every(x=>x)){msg.textContent='Ничья';over=true;return}
+      turn=turn==='X'?'O':'X';msg.textContent='Ход: '+turn;
+    };
+    b.appendChild(c);
+  }
+}
+document.getElementById('new').onclick=start;start();
+</script></body></html>

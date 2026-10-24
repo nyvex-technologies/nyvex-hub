@@ -1,0 +1,12 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Дневник</title><style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:14px}
+textarea,input,button{width:100%;font-size:16px;padding:12px;border-radius:12px;border:1px solid #333;background:#1a2233;color:#fff;margin:6px 0}
+button{background:#8b5cf6;border:0;font-weight:800}a{color:#c4b5fd}</style></head><body>
+<a href="/">← Hub</a><h2>📔 Дневник</h2>
+<input type="date" id="d"><textarea id="t" rows="8"></textarea>
+<button onclick="const k='nyx_diary_'+d.value;localStorage[k]=t.value;alert('OK')">Сохранить день</button>
+<script>
+d.value=new Date().toISOString().slice(0,10);
+function load(){t.value=localStorage['nyx_diary_'+d.value]||''}
+d.onchange=load;load();
+</script></body></html>

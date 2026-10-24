@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Метеориты — Nyvex</title>
+<style>body{margin:0;background:#050814;color:#eef;font-family:system-ui;overflow:hidden;touch-action:manipulation}
+#ui{position:fixed;left:0;right:0;top:0;padding:10px;display:flex;justify-content:space-between;z-index:2}
+a{color:#a78bfa} #f{position:fixed;inset:0} .m{position:absolute;font-size:32px;cursor:pointer;user-select:none;transition:transform .05s}
+</style></head><body>
+<div id="ui"><a href="/">← Hub</a><span id="s">Очки: 0</span></div><div id="f"></div>
+<script>
+let score=0,field=document.getElementById('f');
+function spawn(){const m=document.createElement('div');m.className='m';m.textContent=['☄️','🌠','💥','🪨'][Math.random()*4|0];
+  m.style.left=Math.random()*90+'%';m.style.top='-40px';const speed=2+Math.random()*4;field.appendChild(m);
+  m.onclick=()=>{score+=10;document.getElementById('s').textContent='Очки: '+score;m.remove()};
+  let y=-40;const t=setInterval(()=>{y+=speed;m.style.top=y+'px';if(y>innerHeight){clearInterval(t);m.remove()}},20)}
+setInterval(spawn,600);
+</script></body></html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Рисовалка — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;text-align:center;padding:8px}a{color:#a78bfa}
+canvas{background:#fff;border-radius:12px;touch-action:none;max-width:100%} input{margin:6px}</style></head><body>
+<p><a href="/">← Hub</a></p><h1>🎨 Рисовалка</h1>
+<input type="color" id="col" value="#8b5cf6"> <input type="range" id="sz" min="1" max="40" value="6">
+<br><canvas id="c" width="360" height="400"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');let d=false;
+function pos(e){const r=c.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:(t.clientX-r.left)*c.width/r.width,y:(t.clientY-r.top)*c.height/r.height}}
+function down(e){d=true;const p=pos(e);x.beginPath();x.moveTo(p.x,p.y);e.preventDefault()}
+function move(e){if(!d)return;const p=pos(e);x.strokeStyle=col.value;x.lineWidth=+sz.value;x.lineCap='round';x.lineTo(p.x,p.y);x.stroke();e.preventDefault()}
+c.onmousedown=down;c.onmousemove=move;window.onmouseup=()=>d=false;
+c.ontouchstart=down;c.ontouchmove=move;c.ontouchend=()=>d=false;
+</script></body></html>

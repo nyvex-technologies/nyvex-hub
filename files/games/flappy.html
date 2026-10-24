@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Flappy Fox</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:14px system-ui;min-height:100vh;display:grid;place-items:center}
+canvas{background:linear-gradient(#1a1040,#0e1220);border-radius:12px;border:1px solid rgba(141,92,255,.3);max-width:96vw}
+.bar{margin-top:10px;text-align:center}
+button{border:0;border-radius:10px;padding:10px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+#sc{font-weight:900;color:#c4b0ff;margin-right:12px}
+</style></head><body>
+<canvas id="c" width="360" height="480"></canvas>
+<div class="bar"><span id="sc">0</span><button id="go">Старт</button></div>
+<script>
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+let bird,pipes,score,alive,run,grav=0.35,gap=130;
+function start(){
+  bird={x:80,y:200,vy:0,r:12};pipes=[];score=0;alive=true;run=true;
+  document.getElementById('sc').textContent='0';
+  for(let i=0;i<3;i++)spawn(360+i*180);
+}
+function spawn(x){
+  const top=40+Math.random()*200;
+  pipes.push({x,top,bot:top+gap,w:44});
+}
+function flap(){if(alive)bird.vy=-6.5}
+function loop(){
+  ctx.clearRect(0,0,360,480);
+  ctx.fillStyle='#0b0f1c';ctx.fillRect(0,0,360,480);
+  if(run&&alive){
+    bird.vy+=grav;bird.y+=bird.vy;
+    pipes.forEach(p=>{
+      p.x-=2.4;
+      if(p.x+p.w<0){p.x+=540;p.top=40+Math.random()*200;p.bot=p.top+gap;score++;document.getElementById('sc').textContent=score}
+      if(bird.x+bird.r>p.x&&bird.x-bird.r<p.x+p.w&&(bird.y-bird.r<p.top||bird.y+bird.r>p.bot))alive=false;
+    });
+    if(bird.y>470||bird.y<10)alive=false;
+  }
+  pipes.forEach(p=>{
+    ctx.fillStyle='#6b3fd4';ctx.fillRect(p.x,0,p.w,p.top);ctx.fillRect(p.x,p.bot,p.w,480-p.bot);
+  });
+  ctx.beginPath();ctx.arc(bird.x,bird.y,bird.r,0,Math.PI*2);ctx.fillStyle='#c4b0ff';ctx.fill();
+  ctx.font='16px system-ui';ctx.fillText('🦊',bird.x-10,bird.y+6);
+  if(!alive&&run){ctx.fillStyle='rgba(0,0,0,.5)';ctx.fillRect(0,0,360,480);ctx.fillStyle='#fff';ctx.font='bold 22px system-ui';ctx.fillText('Game Over',120,240)}
+  requestAnimationFrame(loop);
+}
+canvas.onclick=flap;addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();flap()}});
+document.getElementById('go').onclick=start;start();loop();
+</script></body></html>

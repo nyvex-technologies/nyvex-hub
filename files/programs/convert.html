@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Convert</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:15px system-ui}
+.box{width:min(400px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:20px;padding:22px}
+.logo{font-weight:900;color:#c4b0ff;font-size:13px;letter-spacing:1px;margin-bottom:14px}
+select,input{width:100%;padding:12px;margin:6px 0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#0b0e18;color:#fff;font-weight:700}
+#res{font-size:22px;font-weight:900;color:#c4b0ff;min-height:32px}
+</style></head><body>
+<div class="box">
+  <div class="logo">NYVEX CONVERT</div>
+  <label>Тип</label>
+  <select id="type"><option value="len">Длина</option><option value="w">Вес</option><option value="t">Температура</option></select>
+  <label>Значение</label>
+  <input id="val" type="number" value="1">
+  <label>Из</label><select id="from"></select>
+  <label>В</label><select id="to"></select>
+  <div id="res">—</div>
+</div>
+<script>
+const U={
+  len:{m:1,km:1000,cm:0.01,mm:0.001,mi:1609.34,ft:0.3048},
+  w:{kg:1,g:0.001,lb:0.453592,t:1000},
+  t:{}
+};
+const type=document.getElementById('type'),from=document.getElementById('from'),to=document.getElementById('to'),val=document.getElementById('val'),res=document.getElementById('res');
+function fill(){
+  from.innerHTML=to.innerHTML='';
+  if(type.value==='t'){
+    ['C','F','K'].forEach(u=>{from.innerHTML+=`<option>${u}</option>`;to.innerHTML+=`<option>${u}</option>`});
+    to.value='F';
+  }else{
+    Object.keys(U[type.value]).forEach(u=>{from.innerHTML+=`<option>${u}</option>`;to.innerHTML+=`<option>${u}</option>`});
+    to.selectedIndex=1;
+  }
+  calc();
+}
+function calc(){
+  const v=+val.value;const a=from.value,b=to.value;
+  if(type.value==='t'){
+    let c=v;if(a==='F')c=(v-32)*5/9;if(a==='K')c=v-273.15;
+    let o=c;if(b==='F')o=c*9/5+32;if(b==='K')o=c+273.15;
+    res.textContent=o.toFixed(4)+' '+b;return;
+  }
+  const base=v*U[type.value][a];
+  res.textContent=(base/U[type.value][b]).toFixed(6)+' '+b;
+}
+type.onchange=fill;from.onchange=calc;to.onchange=calc;val.oninput=calc;fill();
+</script></body></html>

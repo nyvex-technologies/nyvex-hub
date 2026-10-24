@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сапёр — Nyvex</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0b1020;color:#eef;text-align:center;padding:12px}
+a{color:#a78bfa} .bar{margin:8px} button{margin:2px;padding:8px 12px;border:0;border-radius:8px;background:#8b5cf6;color:#fff;font-weight:700}
+#g{display:inline-grid;gap:2px;margin:12px auto} .c{width:28px;height:28px;font-size:12px;border:0;border-radius:4px;background:#1a2438;color:#fff}
+.c.o{background:#243049} .c.m{background:#b91c1c}
+</style></head><body>
+<p><a href="/">← Hub</a></p><h1>💣 Сапёр</h1>
+<div class="bar">
+<button onclick="start(9,9,10)">Лёгкий</button>
+<button onclick="start(16,16,40)">Средний</button>
+<button onclick="start(16,30,99)">Сложный</button>
+</div>
+<div id="g"></div><p id="s"></p>
+<script>
+let W,H,M,board,open,flag,dead,left;
+function start(h,w,m){H=h;W=w;M=m;dead=false;left=h*w-m;board=Array(H*W).fill(0);open=Array(H*W).fill(0);flag=Array(H*W).fill(0);
+  let mines=[...Array(H*W).keys()].sort(()=>Math.random()-0.5).slice(0,M);
+  mines.forEach(i=>board[i]=-1);
+  for(let i=0;i<H*W;i++){if(board[i]==-1)continue;let n=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){let y=(i/W|0)+dy,x=i%W+dx;if(y>=0&&y<H&&x>=0&&x<W&&board[y*W+x]==-1)n++}board[i]=n}
+  const g=document.getElementById('g');g.style.gridTemplateColumns=`repeat(${W},28px)`;g.innerHTML='';
+  for(let i=0;i<H*W;i++){const b=document.createElement('button');b.className='c';b.oncontextmenu=e=>{e.preventDefault();if(open[i]||dead)return;flag[i]=!flag[i];b.textContent=flag[i]?'🚩':'';};
+  b.onclick=()=>reveal(i);g.appendChild(b)} document.getElementById('s').textContent='';}
+function reveal(i){if(dead||open[i]||flag[i])return;const cells=document.querySelectorAll('#g .c');
+  if(board[i]==-1){dead=true;cells[i].classList.add('m');cells[i].textContent='💥';document.getElementById('s').textContent='Проигрыш';return}
+  const stack=[i];while(stack.length){const j=stack.pop();if(open[j])continue;open[j]=1;left--;cells[j].classList.add('o');cells[j].textContent=board[j]||'';
+  if(board[j]==0){let y=j/W|0,x=j%W;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){let ny=y+dy,nx=x+dx;if(ny>=0&&ny<H&&nx>=0&&nx<W)stack.push(ny*W+nx)}}}
+  if(left<=0){document.getElementById('s').textContent='Победа!';dead=true}}
+start(9,9,10);
+</script></body></html>

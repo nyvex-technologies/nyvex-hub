@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Таймер — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;text-align:center;padding:20px}a{color:#a78bfa}
+#d{font-size:48px;font-variant-numeric:tabular-nums;margin:20px} button{margin:4px;padding:12px 16px;border:0;border-radius:10px;background:#8b5cf6;color:#fff}</style></head><body>
+<p><a href="/">← Hub</a></p><h1>⏱️ Таймер / секундомер</h1>
+<div id="d">00:00.0</div>
+<button onclick="start()">Старт</button><button onclick="stop()">Стоп</button><button onclick="reset()">Сброс</button>
+<script>
+let t0=0,acc=0,run=null;
+function fmt(ms){const s=ms/1000,m=s/60|0,ss=(s%60).toFixed(1);return String(m).padStart(2,'0')+':'+String(ss).padStart(4,'0')}
+function tick(){d.textContent=fmt(acc+(run?Date.now()-t0:0))}
+function start(){if(run)return;t0=Date.now();run=setInterval(tick,50)}
+function stop(){if(!run)return;acc+=Date.now()-t0;clearInterval(run);run=null}
+function reset(){stop();acc=0;tick()}
+</script></body></html>

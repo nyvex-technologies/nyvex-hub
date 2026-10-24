@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сапёр</title><style>
+body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:12px}
+select,button{font-size:16px;padding:10px;border-radius:10px;border:0;margin:4px}
+#g{display:grid;gap:3px;margin-top:12px;width:max-content;max-width:100%;overflow:auto}
+.cell{width:36px;height:36px;border-radius:8px;background:#1e293b;display:grid;place-items:center;font-weight:800;cursor:pointer}
+.cell.o{background:#334155}.cell.m{background:#7f1d1d}.cell.f{background:#365314}
+a{color:#c4b5fd}</style></head><body>
+<a href="/">← Hub</a>
+<h2>💣 Сапёр</h2>
+<select id="d"><option value="8,10">Лёгкий</option><option value="10,15">Норма</option><option value="12,25">Ад</option></select>
+<button id="new">Новая</button>
+<div id="g"></div>
+<script>
+let n=8,mines=10,board=[],open=[],flag=[],dead=false;
+const g=document.getElementById('g');
+function idx(x,y){return y*n+x}
+function neigh(i){const x=i%n,y=i/n|0,o=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=x+dx,ny=y+dy;if(nx>=0&&ny>=0&&nx<n&&ny<n)o.push(idx(nx,ny))}return o}
+function build(){
+  const [nn,mm]=document.getElementById('d').value.split(',').map(Number);n=nn;mines=mm;dead=false;
+  board=Array(n*n).fill(0);open=Array(n*n).fill(false);flag=Array(n*n).fill(false);
+  let left=mines;while(left){const i=Math.random()*n*n|0;if(board[i]===-1)continue;board[i]=-1;left--}
+  for(let i=0;i<n*n;i++) if(board[i]!==-1) board[i]=neigh(i).filter(j=>board[j]===-1).length;
+  g.style.gridTemplateColumns=`repeat(${n},36px)`;
+  draw();
+}
+function reveal(i){
+  if(dead||open[i]||flag[i])return;
+  open[i]=true; if(board[i]===-1){dead=true;open=open.map(()=>true);draw();alert('💥 Мина!');return}
+  if(board[i]===0) neigh(i).forEach(reveal);
+  if(open.every((o,i)=>o||board[i]===-1)) alert('🏆 Победа!');
+}
+function draw(){
+  g.innerHTML='';
+  for(let i=0;i<n*n;i++){
+    const d=document.createElement('div');d.className='cell'+(open[i]?' o':'')+(flag[i]?' f':'');
+    if(open[i]) d.textContent=board[i]===-1?'💣':(board[i]||'');
+    else if(flag[i]) d.textContent='🚩';
+    d.oncontextmenu=e=>{e.preventDefault();if(!open[i]){flag[i]=!flag[i];draw()}};
+    d.onclick=()=>reveal(i)&&draw()||draw();
+    g.appendChild(d);
+  }
+}
+document.getElementById('new').onclick=build;build();
+</script></body></html>

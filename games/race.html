@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Гонки — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;text-align:center}
+a{color:#a78bfa} canvas{background:#1a1f2e;border-radius:12px;max-width:100%} button{margin:6px;padding:12px 20px;border:0;border-radius:10px;background:#8b5cf6;color:#fff;font-size:16px}</style></head><body>
+<p><a href="/">← Hub</a></p><h1>🏁 Гонки</h1><p id="s">0</p>
+<canvas id="c" width="240" height="400"></canvas><br>
+<button onclick="lane=Math.max(0,lane-1)">←</button><button onclick="lane=Math.min(2,lane+1)">→</button>
+<script>
+const cv=document.getElementById('c'),x=cv.getContext('2d');
+let lane=1,cars=[],score=0,over=false;
+function draw(){x.fillStyle='#1a1f2e';x.fillRect(0,0,240,400);x.strokeStyle='#333';for(let i=1;i<3;i++){x.beginPath();x.moveTo(i*80,0);x.lineTo(i*80,400);x.stroke()}
+  x.fillStyle='#8b5cf6';x.fillRect(lane*80+20,340,40,40);x.fillStyle='#ef4444';cars.forEach(c=>x.fillRect(c.l*80+20,c.y,40,40))}
+setInterval(()=>{if(over)return;if(Math.random()<.04)cars.push({l:Math.random()*3|0,y:-50});cars.forEach(c=>c.y+=6);
+  cars=cars.filter(c=>{if(c.y>400){score++;document.getElementById('s').textContent=score;return false}
+  if(c.y>300&&c.y<380&&c.l==lane){over=true;alert('Столкновение! Счёт: '+score)}return true});draw()},50);
+document.onkeydown=e=>{if(e.key=='ArrowLeft')lane=Math.max(0,lane-1);if(e.key=='ArrowRight')lane=Math.min(2,lane+1)};
+</script></body></html>

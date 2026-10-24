@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Калькулятор</title><style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:16px;max-width:320px;margin-inline:auto}
+input{width:100%;font-size:28px;padding:14px;border-radius:12px;border:1px solid #333;background:#1a2233;color:#fff;text-align:right}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+button{padding:16px;font-size:18px;border:0;border-radius:12px;background:#1e293b;color:#fff}
+button.op{background:#4c1d95}a{color:#c4b5fd}</style></head><body>
+<a href="/">← Hub</a><h3>🧮</h3><input id="d" readonly value="0">
+<div class="g" id="g"></div>
+<script>
+const keys=['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'];
+let cur='0';
+const d=document.getElementById('d'),g=document.getElementById('g');
+keys.forEach(k=>{const b=document.createElement('button');b.textContent=k;if('/*-+'.includes(k))b.className='op';
+b.onclick=()=>{if(k==='='){try{cur=String(Function('return '+cur)())}catch{cur='Err'}}
+  else if(cur==='0'&&k!=='.')cur=k;else cur+=k;d.value=cur};g.appendChild(b)});
+</script></body></html>

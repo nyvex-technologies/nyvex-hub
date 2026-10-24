@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Метроном</title><style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:16px;text-align:center}
+input{width:120px;font-size:18px;padding:10px}button{padding:12px 18px;margin:8px;border:0;border-radius:12px;background:#8b5cf6;color:#fff;font-weight:800}
+a{color:#c4b5fd}</style></head><body>
+<a href="/">← Hub</a><h2>🥁 BPM</h2>
+<input id="b" type="number" value="120"><br>
+<button id="go">Старт</button><button id="st">Стоп</button>
+<script>
+let id=null; const ctx=new (window.AudioContext||window.webkitAudioContext)();
+function click(){const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=800;g.gain.value=0.1;o.start();o.stop(ctx.currentTime+0.05)}
+document.getElementById('go').onclick=()=>{clearInterval(id);id=setInterval(click,60000/(+b.value||120))};
+document.getElementById('st').onclick=()=>clearInterval(id);
+</script></body></html>

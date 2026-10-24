@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Nyvex Snake</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:14px system-ui;min-height:100vh;display:grid;place-items:center}
+canvas{background:#0e1220;border-radius:12px;border:1px solid rgba(141,92,255,.3);touch-action:none}
+.bar{margin:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:900;cursor:pointer;background:#1a2033;color:#fff}
+button.go{background:linear-gradient(135deg,#8d5cff,#6b3fd4)}
+#sc{font-weight:900;color:#c4b0ff}
+</style></head><body>
+<div style="text-align:center;padding:12px">
+  <h1>🐍 Змейка</h1>
+  <div id="sc">Счёт: 0</div>
+  <canvas id="c" width="320" height="320"></canvas>
+  <div class="bar">
+    <button class="go" id="start">Старт</button>
+    <button onclick="dir={x:0,y:-1}">⬆</button>
+    <button onclick="dir={x:-1,y:0}">⬅</button>
+    <button onclick="dir={x:1,y:0}">➡</button>
+    <button onclick="dir={x:0,y:1}">⬇</button>
+  </div>
+</div>
+<script>
+const ctx=document.getElementById('c').getContext('2d'),N=16,S=20;
+let snake,dir,food,score,loop,alive;
+function rnd(){return{x:Math.floor(Math.random()*N),y:Math.floor(Math.random()*N)}}
+function place(){do{food=rnd()}while(snake.some(s=>s.x===food.x&&s.y===food.y))}
+function start(){
+  snake=[{x:8,y:8}];dir={x:1,y:0};score=0;alive=true;place();
+  document.getElementById('sc').textContent='Счёт: 0';
+  clearInterval(loop);loop=setInterval(tick,120);
+}
+function tick(){
+  if(!alive)return;
+  const h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+  if(h.x<0||h.y<0||h.x>=N||h.y>=N||snake.some(s=>s.x===h.x&&s.y===h.y)){alive=false;return}
+  snake.unshift(h);
+  if(h.x===food.x&&h.y===food.y){score++;document.getElementById('sc').textContent='Счёт: '+score;place()}
+  else snake.pop();
+  draw();
+}
+function draw(){
+  ctx.fillStyle='#0e1220';ctx.fillRect(0,0,320,320);
+  ctx.fillStyle='#8d5cff';snake.forEach((s,i)=>{ctx.fillStyle=i? '#6b3fd4':'#c4b0ff';ctx.fillRect(s.x*S+1,s.y*S+1,S-2,S-2)});
+  ctx.fillStyle='#ffc857';ctx.fillRect(food.x*S+2,food.y*S+2,S-4,S-4);
+}
+addEventListener('keydown',e=>{
+  const m={ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1},ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},w:{x:0,y:-1},s:{x:0,y:1},a:{x:-1,y:0},d:{x:1,y:0}};
+  const nd=m[e.key];if(!nd)return;if(nd.x+dir.x===0&&nd.y+dir.y===0)return;dir=nd;
+});
+document.getElementById('start').onclick=start;start();
+</script></body></html>

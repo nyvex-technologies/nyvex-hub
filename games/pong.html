@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Pong</title><style>body{margin:0;background:#0b1020;color:#fff;font-family:system-ui;text-align:center}
+canvas{background:#111;width:100%;max-width:480px;border-radius:12px}a{color:#c4b5fd}</style></head><body>
+<a href="/">← Hub</a><p id="s">0 : 0</p><canvas id="c" width="480" height="280"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let px=200,bx=240,by=140,vx=3,vy=2,sc=0,ai=120;
+c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();px=(e.clientX-r.left)/r.width*480-40});
+function loop(){
+  bx+=vx;by+=vy; if(by<0||by>280)vy*=-1;
+  if(bx<20&&by>px&&by<px+70){vx=Math.abs(vx);sc++}
+  if(bx>460){bx=240;by=140;vx=-3;sc=Math.max(0,sc-1)}
+  ai+=(by-ai-25)*.05;
+  if(bx>460-20&&by>ai&&by<ai+70)vx=-Math.abs(vx);
+  x.fillStyle='#111';x.fillRect(0,0,480,280);
+  x.fillStyle='#8b5cf6';x.fillRect(10,px,8,70);x.fillRect(462,ai,8,70);
+  x.beginPath();x.arc(bx,by,8,0,6.28);x.fillStyle='#22d3ee';x.fill();
+  document.getElementById('s').textContent='Очки: '+sc;
+  requestAnimationFrame(loop);
+}
+loop();
+</script></body></html>

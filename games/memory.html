@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Memory</title><style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:12px;text-align:center}
+#g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:360px;margin:12px auto}
+.card{aspect-ratio:1;border-radius:12px;background:#1e293b;display:grid;place-items:center;font-size:28px;cursor:pointer}
+.card.on{background:#4c1d95}a{color:#c4b5fd}</style></head><body>
+<a href="/">← Hub</a><h2>🧠 Memory</h2><div id="g"></div>
+<script>
+const icons=['🦊','☄️','🎮','💎','🔥','🌙','⚡','🎵'];
+let cards=[...icons,...icons].sort(()=>Math.random()-.5).map((v,i)=>({v,i,open:false,done:false}));
+let first=null,lock=false;
+const g=document.getElementById('g');
+function draw(){g.innerHTML=cards.map(c=>`<div class="card ${c.open||c.done?'on':''}" data-i="${c.i}">${c.open||c.done?c.v:''}</div>`).join('');
+  g.querySelectorAll('.card').forEach(el=>el.onclick=()=>{
+    const c=cards[+el.dataset.i]; if(lock||c.open||c.done)return;
+    c.open=true;draw();
+    if(first===null){first=c;return}
+    lock=true;
+    if(first.v===c.v){first.done=c.done=true;first=null;lock=false;draw();if(cards.every(x=>x.done))alert('Готово!')}
+    else setTimeout(()=>{first.open=false;c.open=false;first=null;lock=false;draw()},500);
+  })}
+draw();
+</script></body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nyvex Hub — игры и программы</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="badge">Без рекламы · прямые загрузки</div>
+  <h1 class="logo">NYVEX <span>HUB</span></h1>
+  <p class="tagline">Игры, программы и утилиты в одном месте. Скачивай напрямую — без редиректов и мусора.</p>
+  <div class="stats">
+    <div class="stat"><b id="countAll">0</b><span>проектов</span></div>
+    <div class="stat"><b id="countGames">0</b><span>игр</span></div>
+    <div class="stat"><b id="countPrograms">0</b><span>программ</span></div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-filter="all">✦ Все</button>
+  <button class="tab" data-filter="game">🎮 Игры</button>
+  <button class="tab" data-filter="program">💻 Программы</button>
+  <button class="tab" data-filter="util">🛠️ Утилиты</button>
+  <button class="tab" data-filter="soon">⏳ Скоро</button>
+</nav>
+
+<div class="banner">
+  <div class="banner-inner">
+    <div>
+      <h3>🦊 Nyvex Universe</h3>
+      <p>Telegram Mini App clicker: измерения, события августа и сентября, облачные сохранения.</p>
+    </div>
+    <div class="actions" style="margin:0">
+      <a class="btn" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Открыть бота</a>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <h2 class="section-title">Каталог</h2>
+  <div class="grid" id="catalog">
+
+    <article class="card game featured" data-type="game">
+      <div class="card-top">
+        <div class="icon">🦊</div>
+        <span class="pill">FEATURED</span>
+      </div>
+      <h2>Nyvex Universe</h2>
+      <p>Космический кликер в Telegram: ранги, питомцы, измерения, Digital Event и Perseid Meteor. Прогресс в облаке.</p>
+      <div class="meta">
+        <span class="chip">Telegram</span>
+        <span class="chip">Mini App</span>
+        <span class="chip">Online</span>
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Играть</a>
+        <a class="btn secondary" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Бот</a>
+      </div>
+    </article>
+
+    <article class="card program" data-type="program">
+      <div class="card-top">
+        <div class="icon">💾</div>
+        <span class="pill">PROGRAM</span>
+      </div>
+      <h2>Пример программы</h2>
+      <p>Замени на свой софт. Файл положи в <code>files/programs/</code> и обнови ссылку ниже.</p>
+      <div class="meta">
+        <span class="chip">Windows</span>
+        <span class="chip">ZIP</span>
+      </div>
+      <div class="actions">
+        <a class="btn cyan" href="files/programs/example.zip" download>Скачать</a>
+      </div>
+    </article>
+
+    <article class="card util" data-type="util">
+      <div class="card-top">
+        <div class="icon">⚙️</div>
+        <span class="pill">UTIL</span>
+      </div>
+      <h2>Утилита</h2>
+      <p>Мелкий инструмент или скрипт. Прямая загрузка без рекламы и ожидания.</p>
+      <div class="meta">
+        <span class="chip">Cross-platform</span>
+        <span class="chip">Script</span>
+      </div>
+      <div class="actions">
+        <a class="btn gold" href="files/programs/tool.zip" download>Скачать</a>
+      </div>
+    </article>
+
+    <article class="card game" data-type="game">
+      <div class="card-top">
+        <div class="icon">🌌</div>
+        <span class="pill">GAME</span>
+      </div>
+      <h2>Space Prototype</h2>
+      <p>Заготовка под будущую космическую игру из roadmap Nyvex. Пока плейсхолдер.</p>
+      <div class="meta">
+        <span class="chip">Soon</span>
+        <span class="chip">PC</span>
+      </div>
+      <div class="actions">
+        <a class="btn secondary disabled" href="#">Скоро</a>
+      </div>
+    </article>
+
+    <article class="card soon" data-type="soon">
+      <div class="card-top">
+        <div class="icon">🎃</div>
+        <span class="pill">SOON</span>
+      </div>
+      <h2>Halloween World</h2>
+      <p>Октябрьский хоррор-ивент: Horror World, валюта HOLLOW, THE NIGHT.</p>
+      <div class="meta">
+        <span class="chip">Октябрь 2026</span>
+      </div>
+      <div class="actions">
+        <a class="btn secondary disabled" href="#">В разработке</a>
+      </div>
+    </article>
+
+    <article class="card soon" data-type="soon">
+      <div class="card-top">
+        <div class="icon">🎄</div>
+        <span class="pill">SOON</span>
+      </div>
+      <h2>Christmas World</h2>
+      <p>Зимний мир, календарь подарков и New Year Event на 31 декабря.</p>
+      <div class="meta">
+        <span class="chip">Декабрь 2026</span>
+      </div>
+      <div class="actions">
+        <a class="btn secondary disabled" href="#">В разработке</a>
+      </div>
+    </article>
+
+    <article class="card program" data-type="program">
+      <div class="card-top">
+        <div class="icon">🖥️</div>
+        <span class="pill">PROGRAM</span>
+      </div>
+      <h2>Nyvex Tools</h2>
+      <p>Набор вспомогательных утилит для разработки и деплоя проектов Nyvex.</p>
+      <div class="meta">
+        <span class="chip">Linux</span>
+        <span class="chip">Scripts</span>
+      </div>
+      <div class="actions">
+        <a class="btn cyan" href="files/programs/nyvex-tools.zip" download>Скачать</a>
+      </div>
+    </article>
+
+    <article class="card util" data-type="util">
+      <div class="card-top">
+        <div class="icon">📦</div>
+        <span class="pill">UTIL</span>
+      </div>
+      <h2>Packager</h2>
+      <p>Упаковка билдов и раздача прямыми ссылками через Hub.</p>
+      <div class="meta">
+        <span class="chip">Dev</span>
+      </div>
+      <div class="actions">
+        <a class="btn gold" href="files/programs/packager.zip" download>Скачать</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <p><strong>Nyvex Hub</strong> · без рекламы · без трекеров · прямые ссылки</p>
+  <p style="margin-top:8px"><a href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">@NyvexClickerBot</a></p>
+</footer>
+
+<script>
+const tabs=[...document.querySelectorAll('.tab')];
+const cards=[...document.querySelectorAll('.card')];
+
+function recount(){
+  const vis=cards.filter(c=>!c.classList.contains('hide'));
+  document.getElementById('countAll').textContent=cards.length;
+  document.getElementById('countGames').textContent=cards.filter(c=>c.dataset.type==='game').length;
+  document.getElementById('countPrograms').textContent=cards.filter(c=>c.dataset.type==='program'||c.dataset.type==='util').length;
+}
+recount();
+
+tabs.forEach(btn=>{
+  btn.onclick=()=>{
+    tabs.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    cards.forEach(c=>{
+      const show=f==='all'||c.dataset.type===f;
+      c.classList.toggle('hide',!show);
+    });
+  };
+});
+</script>
+</body>
+</html>

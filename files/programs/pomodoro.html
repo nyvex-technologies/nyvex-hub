@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pomodoro</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:15px system-ui}
+.box{width:min(360px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:24px;text-align:center}
+#mode{color:#9aa3b8;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+#time{font-size:56px;font-weight:950;margin:16px 0;color:#c4b0ff}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:900;cursor:pointer;background:#1a2033;color:#fff}
+button.go{background:linear-gradient(135deg,#8d5cff,#6b3fd4)}
+</style></head><body>
+<div class="box">
+  <div id="mode">Фокус</div>
+  <div id="time">25:00</div>
+  <div class="row">
+    <button class="go" id="start">Старт</button>
+    <button id="reset">Сброс</button>
+    <button id="skip">Пропуск</button>
+  </div>
+</div>
+<script>
+let mode='focus', left=25*60, timer=null, running=false;
+const timeEl=document.getElementById('time'),modeEl=document.getElementById('mode');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function render(){timeEl.textContent=fmt(left);modeEl.textContent=mode==='focus'?'Фокус':'Перерыв'}
+function stop(){clearInterval(timer);timer=null;running=false;document.getElementById('start').textContent='Старт'}
+function next(){
+  mode=mode==='focus'?'break':'focus';
+  left=mode==='focus'?25*60:5*60;render();
+  if(Notification.permission==='granted')new Notification(mode==='focus'?'Время работать':'Перерыв!');
+}
+document.getElementById('start').onclick=()=>{
+  if(running){stop();return}
+  running=true;document.getElementById('start').textContent='Пауза';
+  if(Notification.permission==='default')Notification.requestPermission();
+  timer=setInterval(()=>{left--;if(left<=0){stop();next()}render()},1000);
+};
+document.getElementById('reset').onclick=()=>{stop();mode='focus';left=25*60;render()};
+document.getElementById('skip').onclick=()=>{stop();next()};
+render();
+</script></body></html>

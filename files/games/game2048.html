@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex 2048</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:14px system-ui;min-height:100vh;display:grid;place-items:center}
+.wrap{text-align:center;padding:16px}
+#score{font-weight:900;color:#c4b0ff;margin:8px}
+#g{display:grid;grid-template-columns:repeat(4,70px);gap:8px;background:#0e1220;padding:10px;border-radius:14px;border:1px solid rgba(141,92,255,.25)}
+.cell{width:70px;height:70px;border-radius:10px;background:#1a2033;display:grid;place-items:center;font-size:24px;font-weight:950}
+button{margin-top:12px;border:0;border-radius:10px;padding:10px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+.hint{color:#8b94a8;margin-top:8px;font-size:12px}
+</style></head><body>
+<div class="wrap">
+  <h1>🔢 2048</h1>
+  <div id="score">Счёт: 0</div>
+  <div id="g"></div>
+  <button id="new">Новая</button>
+  <div class="hint">Стрелки / WASD / свайп</div>
+</div>
+<script>
+let grid,score;
+const colors={0:'#1a2033',2:'#2a2040',4:'#3b2a5c',8:'#5b3d9e',16:'#6b3fd4',32:'#8d5cff',64:'#a78bfa',128:'#c4b0ff',256:'#4fd1c5',512:'#2dd4bf',1024:'#fbbf24',2048:'#ff6275'};
+function empty(){const a=[];for(let i=0;i<16;i++)if(!grid[i])a.push(i);return a}
+function add(){const e=empty();if(!e.length)return;grid[e[Math.floor(Math.random()*e.length)]]=Math.random()<.9?2:4}
+function render(){
+  const g=document.getElementById('g');g.innerHTML='';
+  grid.forEach(v=>{const d=document.createElement('div');d.className='cell';d.textContent=v||'';d.style.background=colors[v]||'#ff6b9d';g.appendChild(d)});
+  document.getElementById('score').textContent='Счёт: '+score;
+}
+function slide(row){
+  const a=row.filter(x=>x);for(let i=0;i<a.length-1;i++)if(a[i]===a[i+1]){a[i]*=2;score+=a[i];a[i+1]=0}
+  return a.filter(x=>x).concat([0,0,0,0]).slice(0,4);
+}
+function move(dir){
+  let moved=false;const old=[...grid];
+  const get=(r,c)=>grid[r*4+c];const set=(r,c,v)=>grid[r*4+c]=v;
+  for(let i=0;i<4;i++){
+    let row;
+    if(dir==='L'){row=[0,1,2,3].map(c=>get(i,c));row=slide(row);row.forEach((v,c)=>set(i,c,v))}
+    if(dir==='R'){row=[3,2,1,0].map(c=>get(i,c));row=slide(row);[3,2,1,0].forEach((c,j)=>set(i,c,row[j]))}
+    if(dir==='U'){row=[0,1,2,3].map(r=>get(r,i));row=slide(row);row.forEach((v,r)=>set(r,i,v))}
+    if(dir==='D'){row=[3,2,1,0].map(r=>get(r,i));row=slide(row);[3,2,1,0].forEach((r,j)=>set(r,i,row[j]))}
+  }
+  if(grid.some((v,i)=>v!==old[i])){add();render()}
+}
+function start(){grid=Array(16).fill(0);score=0;add();add();render()}
+document.getElementById('new').onclick=start;
+addEventListener('keydown',e=>{
+  const m={ArrowLeft:'L',ArrowRight:'R',ArrowUp:'U',ArrowDown:'D',a:'L',d:'R',w:'U',s:'D'};
+  if(m[e.key]){e.preventDefault();move(m[e.key])}
+});
+let sx,sy;addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)<30&&Math.abs(dy)<30)return;
+  move(Math.abs(dx)>Math.abs(dy)?(dx>0?'R':'L'):(dy>0?'D':'U'));
+},{passive:true});
+start();
+</script></body></html>

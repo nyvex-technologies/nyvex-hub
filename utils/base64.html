@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Base64 — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:16px}a{color:#a78bfa}
+textarea{width:100%;min-height:100px;background:#121a28;color:#fff;border:1px solid #333;border-radius:12px;padding:12px;margin:8px 0}
+button{padding:10px 14px;margin:4px;border:0;border-radius:10px;background:#8b5cf6;color:#fff}</style></head><body>
+<p><a href="/">← Hub</a></p><h1>💱 Base64</h1>
+<textarea id="a" placeholder="Текст"></textarea>
+<button onclick="b.value=btoa(unescape(encodeURIComponent(a.value)))">→ Base64</button>
+<button onclick="try{a.value=decodeURIComponent(escape(atob(b.value)))}catch(e){a.value='Ошибка'}">← Текст</button>
+<textarea id="b" placeholder="Base64"></textarea>
+</body></html>

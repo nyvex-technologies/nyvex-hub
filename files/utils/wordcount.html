@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Счётчик текста</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:15px system-ui;min-height:100vh;display:grid;place-items:center}
+.box{width:min(480px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:18px}
+textarea{width:100%;height:160px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#0b0e18;color:#fff;padding:12px;font:14px/1.5 system-ui}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stats div{background:#0e1220;border-radius:10px;padding:10px;text-align:center}
+.stats b{display:block;font-size:20px;color:#c4b0ff}
+</style></head><body>
+<div class="box">
+  <h1 style="margin-top:0;font-size:18px;color:#c4b0ff">📊 Счётчик текста</h1>
+  <textarea id="t" placeholder="Вставь текст..."></textarea>
+  <div class="stats">
+    <div><b id="c">0</b>символов</div>
+    <div><b id="w">0</b>слов</div>
+    <div><b id="l">0</b>строк</div>
+  </div>
+</div>
+<script>
+const t=document.getElementById('t');
+t.oninput=()=>{
+  const v=t.value;
+  document.getElementById('c').textContent=v.length;
+  document.getElementById('w').textContent=(v.trim().match(/\S+/g)||[]).length;
+  document.getElementById('l').textContent=v?v.split(/\n/).length:0;
+};
+</script></body></html>

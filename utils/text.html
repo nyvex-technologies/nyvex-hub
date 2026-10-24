@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Текст — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:16px}a{color:#a78bfa}
+textarea{width:100%;min-height:160px;background:#121a28;color:#fff;border:1px solid #333;border-radius:12px;padding:12px}
+button{margin:4px;padding:8px 12px;border:0;border-radius:8px;background:#8b5cf6;color:#fff}</style></head><body>
+<p><a href="/">← Hub</a></p><h1>🔤 Текст</h1>
+<textarea id="t" oninput="u()"></textarea>
+<p id="i">0 символов · 0 слов</p>
+<button onclick="t.value=t.value.toUpperCase();u()">ВЕРХ</button>
+<button onclick="t.value=t.value.toLowerCase();u()">низ</button>
+<button onclick="navigator.clipboard.writeText(t.value)">Копировать</button>
+<script>function u(){const s=t.value;i.textContent=s.length+' символов · '+(s.trim()?s.trim().split(/\\s+/).length:0)+' слов'}</script>
+</body></html>

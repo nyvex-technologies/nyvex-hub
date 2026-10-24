@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Base64</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:14px system-ui}
+.box{width:min(520px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:20px}
+h1{margin:0 0 12px;font-size:18px;color:#c4b0ff}
+textarea{width:100%;height:110px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#0b0e18;color:#fff;padding:12px;font:13px ui-monospace,monospace;margin-bottom:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+button.sec{background:#1a2033}
+#err{color:#ff6275;min-height:18px;margin-top:8px;font-size:12px}
+</style></head><body>
+<div class="box">
+  <h1>🔐 Base64</h1>
+  <textarea id="in" placeholder="Текст или Base64..."></textarea>
+  <div class="row">
+    <button id="enc">В Base64</button>
+    <button class="sec" id="dec">Из Base64</button>
+    <button class="sec" id="copy">Копировать</button>
+  </div>
+  <div id="err"></div>
+  <textarea id="out" placeholder="Результат" readonly></textarea>
+</div>
+<script>
+const inn=document.getElementById('in'),out=document.getElementById('out'),err=document.getElementById('err');
+document.getElementById('enc').onclick=()=>{err.textContent='';try{out.value=btoa(unescape(encodeURIComponent(inn.value)))}catch(e){err.textContent=e.message}};
+document.getElementById('dec').onclick=()=>{err.textContent='';try{out.value=decodeURIComponent(escape(atob(inn.value)))}catch(e){err.textContent='Невалидный Base64'}};
+document.getElementById('copy').onclick=()=>navigator.clipboard.writeText(out.value);
+</script></body></html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JSON</title><style>body{margin:0;background:#0b1020;color:#eef;font-family:monospace;padding:12px}
+textarea{width:100%;min-height:40vh;font-size:14px;padding:10px;border-radius:12px;background:#1a2233;color:#fff;border:1px solid #333}
+button{margin-top:8px;padding:12px;width:100%;border:0;border-radius:12px;background:#8b5cf6;color:#fff;font-weight:800}
+a{color:#c4b5fd;font-family:system-ui}</style></head><body>
+<a href="/">← Hub</a><h3 style="font-family:system-ui">{ } JSON</h3>
+<textarea id="t" placeholder='{"a":1}'></textarea>
+<button onclick="try{t.value=JSON.stringify(JSON.parse(t.value),null,2)}catch(e){alert(e)}">Pretty</button>
+</body></html>

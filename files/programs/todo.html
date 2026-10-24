@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Todo</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:15px system-ui;min-height:100vh;display:grid;place-items:center}
+.box{width:min(420px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:18px}
+h1{margin:0 0 12px;font-size:20px;color:#c4b0ff}
+.row{display:flex;gap:8px;margin-bottom:12px}
+input{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#0b0e18;color:#fff}
+button{border:0;border-radius:10px;padding:12px 14px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+li{list-style:none;display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:#0e1220;margin-bottom:6px}
+li.done span{text-decoration:line-through;color:#8b94a8}
+li button{background:#1a2033;padding:6px 10px}
+ul{padding:0;margin:0}
+</style></head><body>
+<div class="box">
+  <h1>✅ Nyvex Todo</h1>
+  <div class="row"><input id="t" placeholder="Новая задача..."><button id="add">+</button></div>
+  <ul id="list"></ul>
+</div>
+<script>
+const KEY='nyvex_todo_v1';let items=JSON.parse(localStorage.getItem(KEY)||'[]');
+const list=document.getElementById('list');
+function save(){localStorage.setItem(KEY,JSON.stringify(items))}
+function render(){
+  list.innerHTML=items.map((x,i)=>`<li class="${x.done?'done':''}">
+    <input type="checkbox" ${x.done?'checked':''} data-i="${i}" class="chk">
+    <span style="flex:1">${x.text.replace(/</g,'&lt;')}</span>
+    <button data-del="${i}">✕</button></li>`).join('');
+  list.querySelectorAll('.chk').forEach(el=>el.onchange=()=>{items[+el.dataset.i].done=el.checked;save();render()});
+  list.querySelectorAll('[data-del]').forEach(el=>el.onclick=()=>{items.splice(+el.dataset.del,1);save();render()});
+}
+document.getElementById('add').onclick=()=>{
+  const v=document.getElementById('t').value.trim();if(!v)return;
+  items.unshift({text:v,done:false});document.getElementById('t').value='';save();render();
+};
+document.getElementById('t').onkeydown=e=>{if(e.key==='Enter')document.getElementById('add').click()};
+render();
+</script></body></html>

@@ -1,0 +1,172 @@
+:root{
+  --bg:#07090f;
+  --card:#121726;
+  --card2:#181f30;
+  --text:#f4f6ff;
+  --muted:#8e97ad;
+  --accent:#8d5cff;
+  --accent2:#bca7ff;
+  --cyan:#4fd1c5;
+  --pink:#ff6b9d;
+  --gold:#ffc857;
+  --ok:#45d895;
+  --line:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(141,92,255,.28), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(79,209,197,.12), transparent 50%),
+    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(255,107,157,.08), transparent 45%),
+    var(--bg);
+  min-height:100vh;
+}
+
+/* header */
+.header{max-width:1100px;margin:0 auto;padding:48px 20px 28px;text-align:center}
+.badge{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--accent2);
+  background:rgba(141,92,255,.15);border:1px solid rgba(141,92,255,.35);
+  padding:6px 12px;border-radius:999px;margin-bottom:14px;
+}
+.logo{font-size:clamp(32px,6vw,48px);font-weight:950;letter-spacing:3px;margin:0}
+.logo span{
+  background:linear-gradient(120deg,var(--accent2),var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.tagline{color:var(--muted);margin:12px auto 0;max-width:480px;font-size:15px}
+.stats{
+  display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:28px;
+}
+.stat{text-align:center}
+.stat b{display:block;font-size:22px;font-weight:900}
+.stat span{font-size:12px;color:var(--muted)}
+
+/* nav */
+.tabs{
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+  padding:8px 16px 32px;position:sticky;top:0;z-index:10;
+  background:linear-gradient(to bottom,rgba(7,9,15,.95),rgba(7,9,15,.7),transparent);
+  backdrop-filter:blur(10px);
+}
+.tab{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  padding:10px 16px;border-radius:14px;font-weight:800;cursor:pointer;
+  transition:.2s;
+}
+.tab:hover{border-color:rgba(141,92,255,.4);color:#fff}
+.tab.active{
+  color:#fff;background:linear-gradient(135deg,rgba(141,92,255,.4),rgba(79,209,197,.15));
+  border-color:rgba(141,92,255,.55);box-shadow:0 0 24px rgba(141,92,255,.2);
+}
+
+/* sections */
+.section{max-width:1100px;margin:0 auto 40px;padding:0 16px}
+.section-title{
+  font-size:20px;font-weight:900;margin:0 0 16px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-title::after{
+  content:"";flex:1;height:1px;background:var(--line);
+}
+
+/* grid */
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;
+}
+
+/* cards */
+.card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01)),var(--card);
+  border:1px solid var(--line);border-radius:20px;padding:22px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(141,92,255,.4);
+  box-shadow:0 16px 40px rgba(0,0,0,.35),0 0 0 1px rgba(141,92,255,.15);
+}
+.card::before{
+  content:"";position:absolute;inset:0;opacity:0;transition:.25s;pointer-events:none;
+  background:radial-gradient(circle at 80% 0%,rgba(141,92,255,.18),transparent 55%);
+}
+.card:hover::before{opacity:1}
+
+.card.featured{
+  grid-column:span 2;min-height:180px;
+  background:linear-gradient(135deg,rgba(141,92,255,.2),rgba(79,209,197,.08)),var(--card);
+  border-color:rgba(141,92,255,.35);
+}
+@media(max-width:640px){.card.featured{grid-column:span 1}}
+
+.card.game{--tone:var(--accent)}
+.card.program{--tone:var(--cyan)}
+.card.util{--tone:var(--gold)}
+.card.soon{--tone:var(--pink);opacity:.85}
+
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.icon{
+  width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+  font-size:28px;background:rgba(255,255,255,.06);border:1px solid var(--line);
+}
+.pill{
+  font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px;
+  background:color-mix(in srgb,var(--tone) 18%,transparent);
+  color:var(--tone);border:1px solid color-mix(in srgb,var(--tone) 35%,transparent);
+}
+.card h2{margin:0;font-size:18px;font-weight:900}
+.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45;flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-size:11px;font-weight:700;color:var(--muted);
+  background:rgba(255,255,255,.04);border:1px solid var(--line);
+  padding:4px 9px;border-radius:8px;
+}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.btn{
+  flex:1;min-width:120px;text-align:center;text-decoration:none;
+  background:linear-gradient(135deg,var(--accent),#6b3fd4);
+  color:#fff;font-weight:900;padding:12px 14px;border-radius:12px;
+  border:0;cursor:pointer;transition:.15s;font-size:13px;
+}
+.btn:hover{filter:brightness(1.1);transform:scale(1.02)}
+.btn.secondary{
+  background:transparent;border:1px solid var(--line);color:var(--text);
+}
+.btn.secondary:hover{border-color:var(--accent2);color:var(--accent2)}
+.btn.cyan{background:linear-gradient(135deg,var(--cyan),#2a9d8f)}
+.btn.gold{background:linear-gradient(135deg,var(--gold),#d4a017);color:#1a1200}
+.btn:disabled,.btn.disabled{opacity:.4;pointer-events:none}
+
+/* banner */
+.banner{
+  max-width:1100px;margin:0 auto 36px;padding:0 16px;
+}
+.banner-inner{
+  border-radius:22px;padding:28px 24px;
+  background:linear-gradient(120deg,rgba(141,92,255,.25),rgba(255,107,157,.12),rgba(79,209,197,.1));
+  border:1px solid rgba(141,92,255,.3);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;
+}
+.banner h3{margin:0 0 6px;font-size:20px}
+.banner p{margin:0;color:var(--muted);font-size:13px;max-width:420px}
+
+/* footer */
+.footer{
+  text-align:center;color:var(--muted);padding:36px 16px 48px;
+  border-top:1px solid var(--line);margin-top:20px;font-size:13px;
+}
+.footer a{color:var(--accent2);text-decoration:none}
+
+/* hide filtered */
+.card.hide{display:none}
+
+/* books */
+.card.book{--tone:#f0abfc}

@@ -1,0 +1,16 @@
+{
+  "name": "Nyvex Hub",
+  "short_name": "Nyvex",
+  "description": "Nyvex Technologies — games, apps, chat. Official Black Fox",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b1020",
+  "theme_color": "#8b5cf6",
+  "lang": "ru",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

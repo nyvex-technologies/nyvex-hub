@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nyvex Hub — игры, программы, музыка</title>
+<meta name="description" content="Nyvex Hub — каталог игр, программ, утилит и музыки. Без рекламы, прямые загрузки.">
+<meta name="author" content="Nyvex / Official Black Fox">
+<meta name="theme-color" content="#8d5cff">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦊</text></svg>">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#">
+      <div class="brand-mark">🦊</div>
+      <div class="brand-text">NYVEX <span>HUB</span></div>
+    </a>
+    <nav class="top-nav">
+      <a href="#bots">Боты</a>
+      <a href="#games">Игры</a>
+      <a href="#programs">Программы</a>
+      <a href="#utils">Утилиты</a>
+      <a href="#music">Музыка</a>
+      <a href="#books">Книги</a>
+      <a href="#about">О проекте</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-badge">Official · No ads · Direct downloads</div>
+  <h1>NYVEX <em>HUB</em></h1>
+  <p class="hero-lead">Игры, программы, утилиты и музыка в одном месте. Открывай и скачивай напрямую — без рекламы.</p>
+  <div class="hero-meta">
+    <span>Создатель: <strong>Nyvex</strong></span>
+    <span>Музыка: <strong>Official Black Fox</strong></span>
+    <span>Год: <strong>2026</strong></span>
+  </div>
+  <div class="hero-cta">
+    <a class="btn" href="#games">Смотреть игры</a>
+    <a class="btn ghost" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Telegram-бот</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="bots">
+    <div class="section-head"><h2>Боты</h2><div class="line"></div></div>
+    <p class="section-desc">Telegram Mini Apps и боты экосистемы Nyvex.</p>
+    <div class="grid">
+      <article class="card wide">
+        <div class="top">
+          <div class="icon">🦊</div>
+          <span class="pill bot">BOT</span>
+        </div>
+        <h3>Nyvex Universe</h3>
+        <p>Космический кликер: ранги, питомцы, измерения, облачные сохранения и сезонные события.</p>
+        <div class="meta">
+          <span class="chip">Telegram</span>
+          <span class="chip">Mini App</span>
+          <span class="chip">Online</span>
+        </div>
+        <div class="actions">
+          <a class="btn blue" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Открыть бота</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="games">
+    <div class="section-head"><h2>Игры</h2><div class="line"></div></div>
+    <p class="section-desc">Браузерные игры — без установки, сразу во вкладке.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">☄️</div><span class="pill game">GAME</span></div>
+        <h3>Meteor Blaster</h3>
+        <p>Сбивай падающие метеориты. Рекорд сохраняется в браузере.</p>
+        <div class="actions"><a class="btn" href="files/games/meteor-blaster.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🀄</div><span class="pill game">GAME</span></div>
+        <h3>Маджонг</h3>
+        <p>Найди пары плиток. Три уровня сложности.</p>
+        <div class="actions"><a class="btn" href="files/games/mahjong.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">💣</div><span class="pill game">GAME</span></div>
+        <h3>Сапёр</h3>
+        <p>Классический сапёр: лёгкий, средний и сложный.</p>
+        <div class="actions"><a class="btn" href="files/games/minesweeper.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🔢</div><span class="pill game">GAME</span></div>
+        <h3>2048</h3>
+        <p>Собирай плитки. Управление стрелками или свайпом.</p>
+        <div class="actions"><a class="btn" href="files/games/game2048.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🐍</div><span class="pill game">GAME</span></div>
+        <h3>Змейка</h3>
+        <p>Классика с кнопками на экране для телефона.</p>
+        <div class="actions"><a class="btn" href="files/games/snake.html" target="_blank">Играть</a></div>
+      </article>
+    
+      <article class="card">
+        <div class="top"><div class="icon">🏓</div><span class="pill game">GAME</span></div>
+        <h3>Pong</h3>
+        <p>Классика против ИИ. Мышь или палец.</p>
+        <div class="actions"><a class="btn" href="files/games/pong.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🧱</div><span class="pill game">GAME</span></div>
+        <h3>Breakout</h3>
+        <p>Разбивай блоки платформой.</p>
+        <div class="actions"><a class="btn" href="files/games/breakout.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🧠</div><span class="pill game">GAME</span></div>
+        <h3>Memory</h3>
+        <p>Найди пары карточек.</p>
+        <div class="actions"><a class="btn" href="files/games/memory.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">⚡</div><span class="pill game">GAME</span></div>
+        <h3>Reaction</h3>
+        <p>Проверь скорость реакции.</p>
+        <div class="actions"><a class="btn" href="files/games/reaction.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🦊</div><span class="pill game">GAME</span></div>
+        <h3>Flappy Fox</h3>
+        <p>Тап / пробел — взлёт между труб.</p>
+        <div class="actions"><a class="btn" href="files/games/flappy.html" target="_blank">Играть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">⭕</div><span class="pill game">GAME</span></div>
+        <h3>Крестики-нолики</h3>
+        <p>Классика 3×3 на двоих.</p>
+        <div class="actions"><a class="btn" href="files/games/tictactoe.html" target="_blank">Играть</a></div>
+      </article>
+</div>
+  </section>
+
+  <section class="section" id="programs">
+    <div class="section-head"><h2>Программы</h2><div class="line"></div></div>
+    <p class="section-desc">Веб-приложения — работают прямо в браузере.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">📝</div><span class="pill prog">APP</span></div>
+        <h3>Notes</h3>
+        <p>Блокнот с поиском и экспортом в JSON.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/notes.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">✅</div><span class="pill prog">APP</span></div>
+        <h3>Todo</h3>
+        <p>Простой список задач с сохранением.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/todo.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🧮</div><span class="pill prog">APP</span></div>
+        <h3>Калькулятор</h3>
+        <p>Базовые арифметические операции.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/calculator.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">⏱️</div><span class="pill prog">APP</span></div>
+        <h3>Таймер</h3>
+        <p>Таймер обратного отсчёта и секундомер.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/timer.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🔐</div><span class="pill prog">APP</span></div>
+        <h3>Пароли</h3>
+        <p>Генератор надёжных случайных паролей.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/passgen.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">📐</div><span class="pill prog">APP</span></div>
+        <h3>Конвертер</h3>
+        <p>Длина, вес и температура.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/convert.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🎨</div><span class="pill prog">APP</span></div>
+        <h3>Палитра</h3>
+        <p>Выбор цвета и копирование HEX.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/colors.html" target="_blank">Открыть</a></div>
+      </article>
+    
+      <article class="card">
+        <div class="top"><div class="icon">⏱️</div><span class="pill prog">APP</span></div>
+        <h3>Stopwatch</h3>
+        <p>Секундомер с кругами (laps).</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/stopwatch.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🎲</div><span class="pill prog">APP</span></div>
+        <h3>Random</h3>
+        <p>Число, монетка, кубик, выбор из списка.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/random.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🍅</div><span class="pill prog">APP</span></div>
+        <h3>Pomodoro</h3>
+        <p>25 мин фокус · 5 мин перерыв.</p>
+        <div class="actions"><a class="btn cyan" href="files/programs/pomodoro.html" target="_blank">Открыть</a></div>
+      </article>
+</div>
+  </section>
+
+  <section class="section" id="utils">
+    <div class="section-head"><h2>Утилиты</h2><div class="line"></div></div>
+    <p class="section-desc">Мелкие инструменты на каждый день.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">📊</div><span class="pill util">UTIL</span></div>
+        <h3>Счётчик текста</h3>
+        <p>Считает символы, слова и строки.</p>
+        <div class="actions"><a class="btn gold" href="files/utils/wordcount.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🧩</div><span class="pill util">UTIL</span></div>
+        <h3>JSON Format</h3>
+        <p>Форматировать или сжать JSON.</p>
+        <div class="actions"><a class="btn gold" href="files/utils/jsonfmt.html" target="_blank">Открыть</a></div>
+      </article>
+    
+      <article class="card">
+        <div class="top"><div class="icon">🔐</div><span class="pill util">UTIL</span></div>
+        <h3>Base64</h3>
+        <p>Кодирование и декодирование текста.</p>
+        <div class="actions"><a class="btn gold" href="files/utils/base64.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">🆔</div><span class="pill util">UTIL</span></div>
+        <h3>UUID</h3>
+        <p>Генератор UUID v4.</p>
+        <div class="actions"><a class="btn gold" href="files/utils/uuid.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">⏱️</div><span class="pill util">UTIL</span></div>
+        <h3>Unix Time</h3>
+        <p>Timestamp ↔ дата.</p>
+        <div class="actions"><a class="btn gold" href="files/utils/unixtime.html" target="_blank">Открыть</a></div>
+      </article>
+      <article class="card">
+        <div class="top"><div class="icon">#️⃣</div><span class="pill util">UTIL</span></div>
+        <h3>SHA-256</h3>
+        <p>Хеш текста в браузере.</p>
+        <div class="actions"><a class="btn gold" href="files/utils/hash.html" target="_blank">Открыть</a></div>
+      </article>
+</div>
+  </section>
+
+  <section class="section" id="music">
+    <div class="section-head"><h2>Музыка</h2><div class="line"></div></div>
+    <p class="section-desc">Official Black Fox — свои треки, прямое скачивание.</p>
+    <div class="grid">
+      <article class="card wide">
+        <div class="top"><div class="icon">🎧</div><span class="pill music">MUSIC</span></div>
+        <h3>Official Black Fox Music</h3>
+        <p>Положи файлы в папку <code>files/music/</code> и обнови названия треков ниже.</p>
+        <div class="tracks">
+          <div class="track"><b>01</b><span>Track One</span><a href="files/music/track-one.mp3" download>Скачать</a></div>
+          <div class="track"><b>02</b><span>Track Two</span><a href="files/music/track-two.mp3" download>Скачать</a></div>
+          <div class="track"><b>03</b><span>Track Three</span><a href="files/music/track-three.mp3" download>Скачать</a></div>
+        </div>
+        <div class="actions">
+          <a class="btn" href="files/music/album.zip" download>Скачать альбом (ZIP)</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="books">
+    <div class="section-head"><h2>Книги</h2><div class="line"></div></div>
+    <p class="section-desc">PDF и EPUB — файлы клади в <code>files/books/</code>.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="top"><div class="icon">📖</div><span class="pill book">BOOK</span></div>
+        <h3>Пример книги</h3>
+        <p>Замени на свой PDF, когда будет готов.</p>
+        <div class="actions"><a class="btn" href="files/books/example.pdf" download>Скачать PDF</a></div>
+      </article>
+    </div>
+  </section>
+
+  
+  <section class="section" id="about">
+    <div class="about">
+      <h2>О проекте</h2>
+      <p>
+        <strong>Nyvex Hub</strong> — личная платформа создателя <strong>Nyvex</strong>
+        (музыка: Official Black Fox). Здесь собраны игры, программы, утилиты и релизы
+        без рекламы и сторонних магазинов.
+      </p>
+      <div class="about-grid">
+        <div>
+          <strong>Название</strong>
+          <span>Nyvex Hub</span>
+        </div>
+        <div>
+          <strong>Создатель</strong>
+          <span>Nyvex</span>
+        </div>
+        <div>
+          <strong>Музыка</strong>
+          <span>Official Black Fox</span>
+        </div>
+        <div>
+          <strong>Бот</strong>
+          <span>@NyvexClickerBot</span>
+        </div>
+        <div>
+          <strong>Стек</strong>
+          <span>HTML · CSS · JS</span>
+        </div>
+        <div>
+          <strong>Год</strong>
+          <span>2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p><strong>Nyvex Hub</strong> · 2026</p>
+  <p class="row">Создатель: Nyvex</p>
+  <p class="row">Музыка: Official Black Fox</p>
+  <p class="row"><a href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">@NyvexClickerBot</a></p>
+</footer>
+
+</body>
+</html>

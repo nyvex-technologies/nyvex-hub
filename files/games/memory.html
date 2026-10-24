@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Memory</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:14px system-ui;min-height:100vh;display:grid;place-items:center}
+.wrap{padding:16px;text-align:center}
+#board{display:grid;grid-template-columns:repeat(4,70px);gap:10px;justify-content:center}
+.card{width:70px;height:70px;border-radius:12px;background:#1a2033;border:2px solid rgba(141,92,255,.25);
+display:grid;place-items:center;font-size:28px;cursor:pointer;user-select:none;transition:.15s}
+.card.on{background:#2a2040;border-color:#8d5cff}
+.card.done{opacity:.35;pointer-events:none}
+button{margin-top:14px;border:0;border-radius:10px;padding:10px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+#msg{margin-top:10px;color:#c4b0ff;font-weight:800;min-height:20px}
+</style></head><body>
+<div class="wrap">
+  <h1>🧠 Memory</h1>
+  <div id="board"></div>
+  <div id="msg"></div>
+  <button id="new">Заново</button>
+</div>
+<script>
+const EMO=['🦊','☄️','🌙','💎','🔥','⭐','🍀','🎮'];
+let first=null,lock=false,left=8,moves=0;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function start(){
+  first=null;lock=false;left=8;moves=0;document.getElementById('msg').textContent='';
+  const tiles=shuffle([...EMO,...EMO]);
+  const board=document.getElementById('board');board.innerHTML='';
+  tiles.forEach(e=>{
+    const el=document.createElement('div');el.className='card';el.dataset.e=e;el.textContent='❓';
+    el.onclick=()=>{
+      if(lock||el.classList.contains('on')||el.classList.contains('done'))return;
+      el.textContent=e;el.classList.add('on');
+      if(!first){first=el;return}
+      moves++;lock=true;
+      if(first.dataset.e===e){
+        setTimeout(()=>{first.classList.add('done');el.classList.add('done');first=null;lock=false;left--;
+          if(left<=0)document.getElementById('msg').textContent='Победа! Ходов: '+moves;
+        },300);
+      } else {
+        setTimeout(()=>{first.textContent='❓';el.textContent='❓';first.classList.remove('on');el.classList.remove('on');first=null;lock=false},500);
+      }
+    };
+    board.appendChild(el);
+  });
+}
+document.getElementById('new').onclick=start;start();
+</script></body></html>

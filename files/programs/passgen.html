@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Pass</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:15px system-ui}
+.box{width:min(400px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:20px;padding:22px}
+.logo{font-weight:900;color:#c4b0ff;font-size:13px;letter-spacing:1px;margin-bottom:14px}
+#out{width:100%;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#0b0e18;color:#c4b0ff;font-weight:800;font-size:16px;margin-bottom:12px;word-break:break-all}
+label{display:flex;align-items:center;gap:8px;margin:8px 0;color:#8b94a8}
+input[type=range]{width:100%}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff;width:100%;margin-top:10px}
+button.sec{background:#1a2033;margin-top:8px}
+</style></head><body>
+<div class="box">
+  <div class="logo">NYVEX PASSGEN</div>
+  <div id="out">••••••••</div>
+  <label>Длина: <b id="lenVal">16</b></label>
+  <input type="range" id="len" min="8" max="64" value="16">
+  <label><input type="checkbox" id="up" checked> Заглавные</label>
+  <label><input type="checkbox" id="low" checked> Строчные</label>
+  <label><input type="checkbox" id="num" checked> Цифры</label>
+  <label><input type="checkbox" id="sym"> Символы</label>
+  <button id="gen">Сгенерировать</button>
+  <button class="sec" id="copy">Копировать</button>
+</div>
+<script>
+const out=document.getElementById('out');
+const len=document.getElementById('len');
+len.oninput=()=>document.getElementById('lenVal').textContent=len.value;
+function gen(){
+  let chars='';
+  if(document.getElementById('up').checked)chars+='ABCDEFGHJKLMNPQRSTUVWXYZ';
+  if(document.getElementById('low').checked)chars+='abcdefghijkmnopqrstuvwxyz';
+  if(document.getElementById('num').checked)chars+='23456789';
+  if(document.getElementById('sym').checked)chars+='!@#$%^&*-_=+';
+  if(!chars){out.textContent='Выбери алфавит';return}
+  const a=new Uint32Array(+len.value);
+  crypto.getRandomValues(a);
+  out.textContent=[...a].map(x=>chars[x%chars.length]).join('');
+}
+document.getElementById('gen').onclick=gen;
+document.getElementById('copy').onclick=async()=>{await navigator.clipboard.writeText(out.textContent);document.getElementById('copy').textContent='Скопировано';setTimeout(()=>document.getElementById('copy').textContent='Копировать',1200)};
+gen();
+</script></body></html>

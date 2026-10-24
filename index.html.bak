@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Hub — игры, софт, музыка, книги</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <div class="badge">Без рекламы · прямые ссылки · свой контент</div>
+  <h1 class="logo">NYVEX <span>HUB</span></h1>
+  <p class="tagline">Игры, программы, утилиты, музыка и книги — всё скачивается напрямую.</p>
+  <div class="stats">
+    <div class="stat"><b id="countAll">0</b><span>всего</span></div>
+    <div class="stat"><b id="countGames">0</b><span>игр</span></div>
+    <div class="stat"><b id="countPrograms">0</b><span>софт</span></div>
+    <div class="stat"><b id="countMusic">0</b><span>музыка</span></div>
+    <div class="stat"><b id="countBooks">0</b><span>книги</span></div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-filter="all">✦ Все</button>
+  <button class="tab" data-filter="game">🎮 Игры</button>
+  <button class="tab" data-filter="program">💻 Программы</button>
+  <button class="tab" data-filter="util">🛠️ Утилиты</button>
+  <button class="tab" data-filter="music">🎵 Музыка</button>
+  <button class="tab" data-filter="book">📖 Книги</button>
+  <button class="tab" data-filter="soon">⏳ Скоро</button>
+</nav>
+
+<div class="legend">
+  <div class="legend-item"><b>🎮 Игры</b>Игры, демо, Telegram Mini Apps</div>
+  <div class="legend-item"><b>💻 Программы</b>Полноценный софт и установщики</div>
+  <div class="legend-item"><b>🛠️ Утилиты</b>Скрипты и мелкие инструменты</div>
+  <div class="legend-item"><b>🎵 Музыка</b>Мои треки: слушать и скачать</div>
+  <div class="legend-item"><b>📖 Книги</b>PDF, EPUB, рассказы, гайды</div>
+  <div class="legend-item"><b>⏳ Скоро</b>Анонсы без файла</div>
+</div>
+
+<div class="banner">
+  <div class="banner-inner">
+    <div>
+      <h3>🦊 Nyvex Universe</h3>
+      <p>Главный проект: кликер в Telegram с облачными сохранениями и сезонными ивентами.</p>
+    </div>
+    <a class="btn" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Открыть бота</a>
+  </div>
+</div>
+
+<section class="section">
+  <h2 class="section-title">Каталог</h2>
+  <div class="grid" id="catalog">
+
+    <article class="card game featured" data-type="game">
+      <div class="card-top"><div class="icon">🦊</div><span class="pill">ИГРА</span></div>
+      <h2>Nyvex Universe</h2>
+      <p>Telegram clicker: ранги, питомцы, измерения, Digital Event. Прогресс в облаке.</p>
+      <div class="meta"><span class="chip">Telegram</span><span class="chip">Online</span></div>
+      <div class="actions"><a class="btn" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Играть</a></div>
+    </article>
+
+    <article class="card music featured" data-type="music">
+      <div class="card-top"><div class="icon">🎧</div><span class="pill">МУЗЫКА</span></div>
+      <h2>Official Black Fox Music</h2>
+      <p>Мои треки. Файлы в <code>files/music/</code>.</p>
+      <div class="meta"><span class="chip">MP3</span><span class="chip">Свободно</span></div>
+      <div class="track-list">
+        <div class="track-row"><span class="t-num">01</span><span class="t-name">Track One</span><a class="t-dl" href="files/music/track-one.mp3" download>Скачать</a></div>
+        <div class="track-row"><span class="t-num">02</span><span class="t-name">Track Two</span><a class="t-dl" href="files/music/track-two.mp3" download>Скачать</a></div>
+        <div class="track-row"><span class="t-num">03</span><span class="t-name">Track Three</span><a class="t-dl" href="files/music/track-three.mp3" download>Скачать</a></div>
+      </div>
+      <audio class="player" controls preload="none"><source src="files/music/track-one.mp3" type="audio/mpeg"></audio>
+      <div class="actions"><a class="btn" href="files/music/album.zip" download>Скачать всё (ZIP)</a></div>
+    </article>
+
+    <article class="card book featured" data-type="book">
+      <div class="card-top"><div class="icon">📖</div><span class="pill">КНИГА</span></div>
+      <h2>Пример книги</h2>
+      <p>Сюда — твои PDF/EPUB. Положи файл в <code>files/books/</code> и поменяй название.</p>
+      <div class="meta"><span class="chip">PDF</span><span class="chip">EPUB</span></div>
+      <div class="actions">
+        <a class="btn" href="files/books/example.pdf" download>Скачать PDF</a>
+        <a class="btn secondary" href="files/books/example.epub" download>EPUB</a>
+      </div>
+    </article>
+
+    <article class="card book" data-type="book">
+      <div class="card-top"><div class="icon">📝</div><span class="pill">РАССКАЗ</span></div>
+      <h2>Короткий рассказ</h2>
+      <p>Небольшая работа — один файл, прямая загрузка.</p>
+      <div class="meta"><span class="chip">PDF</span></div>
+      <div class="actions"><a class="btn" href="files/books/story.pdf" download>Скачать</a></div>
+    </article>
+
+    <article class="card program" data-type="program">
+      <div class="card-top"><div class="icon">💾</div><span class="pill">ПРОГРАММА</span></div>
+      <h2>Пример программы</h2>
+      <p>Полноценный софт. Файлы: <code>files/programs/</code>.</p>
+      <div class="meta"><span class="chip">Windows</span><span class="chip">ZIP</span></div>
+      <div class="actions"><a class="btn cyan" href="files/programs/example.zip" download>Скачать</a></div>
+    </article>
+
+    <article class="card util" data-type="util">
+      <div class="card-top"><div class="icon">⚙️</div><span class="pill">УТИЛИТА</span></div>
+      <h2>Packager / Tool</h2>
+      <p>Мелкие скрипты и инструменты.</p>
+      <div class="meta"><span class="chip">Linux</span></div>
+      <div class="actions"><a class="btn gold" href="files/programs/tool.zip" download>Скачать</a></div>
+    </article>
+
+    <article class="card music" data-type="music">
+      <div class="card-top"><div class="icon">🌙</div><span class="pill">СИНГЛ</span></div>
+      <h2>Night Run</h2>
+      <p>Один трек. Замени на свой MP3.</p>
+      <div class="meta"><span class="chip">MP3</span></div>
+      <audio class="player" controls preload="none"><source src="files/music/night-run.mp3" type="audio/mpeg"></audio>
+      <div class="actions"><a class="btn" href="files/music/night-run.mp3" download>Скачать MP3</a></div>
+    </article>
+
+    <article class="card soon" data-type="soon">
+      <div class="card-top"><div class="icon">🎃</div><span class="pill">СКОРО</span></div>
+      <h2>Halloween World</h2>
+      <p>Октябрьский ивент Nyvex — пока анонс.</p>
+      <div class="actions"><a class="btn secondary disabled" href="#">В разработке</a></div>
+    </article>
+
+    <article class="card soon" data-type="soon">
+      <div class="card-top"><div class="icon">📚</div><span class="pill">СКОРО</span></div>
+      <h2>Новая книга</h2>
+      <p>Анонс будущей книги. Когда PDF готов — переносим в «Книги».</p>
+      <div class="actions"><a class="btn secondary disabled" href="#">Скоро</a></div>
+    </article>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <p><strong>Nyvex Hub</strong> · игры · софт · музыка · книги · без рекламы</p>
+  <p style="margin-top:8px"><a href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">@NyvexClickerBot</a></p>
+</footer>
+
+<script>
+const tabs=[...document.querySelectorAll('.tab')];
+const cards=[...document.querySelectorAll('.card')];
+function recount(){
+  document.getElementById('countAll').textContent=cards.length;
+  document.getElementById('countGames').textContent=cards.filter(c=>c.dataset.type==='game').length;
+  document.getElementById('countPrograms').textContent=cards.filter(c=>c.dataset.type==='program'||c.dataset.type==='util').length;
+  document.getElementById('countMusic').textContent=cards.filter(c=>c.dataset.type==='music').length;
+  document.getElementById('countBooks').textContent=cards.filter(c=>c.dataset.type==='book').length;
+}
+recount();
+tabs.forEach(btn=>{
+  btn.onclick=()=>{
+    tabs.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    cards.forEach(c=>c.classList.toggle('hide',!(f==='all'||c.dataset.type===f)));
+  };
+});
+</script>
+</body>
+</html>

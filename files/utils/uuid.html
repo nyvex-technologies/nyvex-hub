@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UUID</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:15px system-ui}
+.box{width:min(440px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:22px;text-align:center}
+h1{margin:0 0 14px;font-size:18px;color:#c4b0ff}
+#id{word-break:break-all;font:14px ui-monospace,monospace;background:#0b0e18;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);margin-bottom:12px;color:#c4b0ff}
+button{border:0;border-radius:12px;padding:12px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff;margin:4px}
+button.sec{background:#1a2033}
+</style></head><body>
+<div class="box">
+  <h1>UUID v4</h1>
+  <div id="id">—</div>
+  <button id="gen">Сгенерировать</button>
+  <button class="sec" id="copy">Копировать</button>
+</div>
+<script>
+const el=document.getElementById('id');
+function gen(){el.textContent=crypto.randomUUID()}
+document.getElementById('gen').onclick=gen;
+document.getElementById('copy').onclick=()=>navigator.clipboard.writeText(el.textContent);
+gen();
+</script></body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unix Time</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#080a12;color:#fff;font:15px system-ui}
+.box{width:min(420px,94vw);background:#121726;border:1px solid rgba(141,92,255,.3);border-radius:18px;padding:22px}
+h1{margin:0 0 12px;font-size:18px;color:#c4b0ff}
+label{display:block;color:#9aa3b8;font-size:12px;margin:10px 0 4px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#0b0e18;color:#fff}
+#live{font-size:28px;font-weight:950;color:#c4b0ff;margin:8px 0 14px}
+button{margin-top:10px;border:0;border-radius:12px;padding:12px;width:100%;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+#out{margin-top:12px;color:#9aa3b8;font-size:13px;line-height:1.5}
+</style></head><body>
+<div class="box">
+  <h1>⏱️ Unix Time</h1>
+  <div style="color:#9aa3b8;font-size:12px">Сейчас (сек)</div>
+  <div id="live">—</div>
+  <label>Timestamp → дата</label>
+  <input id="ts" placeholder="1700000000">
+  <button id="toDate">В дату</button>
+  <label>Дата → timestamp</label>
+  <input id="dt" type="datetime-local">
+  <button id="toTs" style="background:#1a2033">В timestamp</button>
+  <div id="out"></div>
+</div>
+<script>
+const live=document.getElementById('live'),out=document.getElementById('out');
+setInterval(()=>live.textContent=Math.floor(Date.now()/1000),200);
+document.getElementById('toDate').onclick=()=>{
+  let v=document.getElementById('ts').value.trim();
+  if(!v)return;if(v.length>12)v=Math.floor(+v/1000);
+  const d=new Date(+v*1000);
+  out.textContent=isNaN(d)?'Неверное значение':d.toLocaleString('ru-RU')+' · ISO: '+d.toISOString();
+};
+document.getElementById('toTs').onclick=()=>{
+  const v=document.getElementById('dt').value;if(!v)return;
+  const d=new Date(v);out.textContent='Секунды: '+Math.floor(d.getTime()/1000)+' · мс: '+d.getTime();
+};
+</script></body></html>

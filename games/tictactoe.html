@@ -1,0 +1,12 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Крестики-нолики — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;text-align:center;padding:16px}a{color:#a78bfa}
+#b{display:inline-grid;grid-template-columns:repeat(3,80px);gap:6px} button{width:80px;height:80px;font-size:32px;border:0;border-radius:12px;background:#1a2438;color:#fff}</style></head><body>
+<p><a href="/">← Hub</a></p><h1>❌ Крестики-нолики</h1><div id="b"></div><p id="m"></p>
+<script>
+let c=Array(9).fill(''),you=true,done=false;const b=document.getElementById('b');
+function win(p){return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(l=>l.every(i=>c[i]==p))}
+function bot(){const e=c.map((v,i)=>v?'':i).filter(v=>v!=='');if(!e.length)return;const i=e[Math.random()*e.length|0];c[i]='O';draw();if(win('O')){done=true;document.getElementById('m').textContent='Бот победил'}}
+function draw(){b.innerHTML='';c.forEach((v,i)=>{const btn=document.createElement('button');btn.textContent=v;btn.onclick=()=>{if(!you||done||c[i])return;c[i]='X';draw();if(win('X')){done=true;document.getElementById('m').textContent='Ты победил!';return}if(c.every(Boolean)){document.getElementById('m').textContent='Ничья';return}you=false;setTimeout(()=>{bot();you=true},200)};b.appendChild(btn)})}
+draw();
+</script></body></html>

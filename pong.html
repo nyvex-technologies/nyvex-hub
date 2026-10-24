@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pong</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:14px system-ui;min-height:100vh;display:grid;place-items:center}
+canvas{background:#0e1220;border-radius:12px;border:1px solid rgba(141,92,255,.3);max-width:96vw}
+.bar{margin-top:10px;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+button{border:0;border-radius:10px;padding:10px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff}
+#sc{font-weight:900;color:#c4b0ff}
+</style></head><body>
+<canvas id="c" width="640" height="360"></canvas>
+<div class="bar"><span id="sc">0 : 0</span><button id="go">Старт / Пауза</button></div>
+<script>
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+let p={y:150},ai={y:150},b={x:320,y:180,vx:4,vy:2},s=[0,0],run=false;
+const PH=70,PW=10;
+function resetBall(dir=1){b.x=320;b.y=180;b.vx=4*dir;b.vy=(Math.random()*2+1)*(Math.random()<.5?1:-1)}
+function loop(){
+  ctx.fillStyle='#0e1220';ctx.fillRect(0,0,640,360);
+  ctx.fillStyle='#2a3148';for(let y=0;y<360;y+=20)ctx.fillRect(318,y,4,10);
+  if(run){
+    b.x+=b.vx;b.y+=b.vy;
+    if(b.y<8||b.y>352)b.vy*=-1;
+    if(b.x<30&&b.y>p.y&&b.y<p.y+PH){b.vx=Math.abs(b.vx)+0.2;b.vy+=(b.y-(p.y+PH/2))/15}
+    if(b.x>610&&b.y>ai.y&&b.y<ai.y+PH){b.vx=-(Math.abs(b.vx)+0.2);b.vy+=(b.y-(ai.y+PH/2))/15}
+    if(b.x<0){s[1]++;resetBall(1)} if(b.x>640){s[0]++;resetBall(-1)}
+    document.getElementById('sc').textContent=s[0]+' : '+s[1];
+    const target=b.y-PH/2;ai.y+=(target-ai.y)*0.08;ai.y=Math.max(0,Math.min(290,ai.y));
+  }
+  ctx.fillStyle='#c4b0ff';ctx.fillRect(20,p.y,PW,PH);ctx.fillRect(610,ai.y,PW,PH);
+  ctx.beginPath();ctx.arc(b.x,b.y,8,0,Math.PI*2);ctx.fillStyle='#8d5cff';ctx.fill();
+  requestAnimationFrame(loop);
+}
+canvas.addEventListener('mousemove',e=>{
+  const r=canvas.getBoundingClientRect();
+  p.y=Math.max(0,Math.min(290,(e.clientY-r.top)*(360/r.height)-PH/2));
+});
+canvas.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  const r=canvas.getBoundingClientRect(),t=e.touches[0];
+  p.y=Math.max(0,Math.min(290,(t.clientY-r.top)*(360/r.height)-PH/2));
+},{passive:false});
+document.getElementById('go').onclick=()=>run=!run;
+loop();
+</script></body></html>

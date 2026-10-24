@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Nyvex · Meteor Blaster</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#06080e;color:#fff;font:14px system-ui,sans-serif;overflow:hidden;touch-action:none}
+#ui{position:fixed;inset:0;pointer-events:none;z-index:5}
+.hud{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pill{background:rgba(18,22,38,.85);border:1px solid rgba(141,92,255,.35);padding:8px 12px;border-radius:12px;font-weight:800;backdrop-filter:blur(8px)}
+.pill b{color:#c4b0ff}
+#overlay{position:fixed;inset:0;display:grid;place-items:center;background:rgba(6,8,14,.82);z-index:10;pointer-events:auto}
+.panel{width:min(360px,92vw);background:linear-gradient(160deg,rgba(141,92,255,.2),rgba(18,22,38,.95));border:1px solid rgba(141,92,255,.4);border-radius:22px;padding:28px 22px;text-align:center}
+.panel h1{font-size:26px;font-weight:950;margin-bottom:8px;letter-spacing:1px}
+.panel p{color:#8b94a8;margin-bottom:18px;line-height:1.45}
+.btn{display:inline-block;border:0;cursor:pointer;background:linear-gradient(135deg,#8d5cff,#6b3fd4);color:#fff;font-weight:900;padding:12px 22px;border-radius:14px;font-size:15px}
+.btn:hover{filter:brightness(1.08)}
+.hint{margin-top:14px;font-size:12px;color:#8b94a8}
+canvas{display:block;width:100vw;height:100vh}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <div class="hud">
+    <div class="pill">Очки: <b id="score">0</b></div>
+    <div class="pill">Рекорд: <b id="best">0</b></div>
+    <div class="pill">Жизни: <b id="lives">3</b></div>
+  </div>
+</div>
+<div id="overlay">
+  <div class="panel">
+    <h1>☄️ METEOR BLASTER</h1>
+    <p>Сбивай падающие метеориты. Кликай / тапай по ним.<br>Пропущенный метеорит = −1 жизнь.</p>
+    <button class="btn" id="startBtn">Играть</button>
+    <div class="hint">ПК: мышь · Телефон: тап</div>
+  </div>
+</div>
+<script>
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const scoreEl=document.getElementById('score');
+const bestEl=document.getElementById('best');
+const livesEl=document.getElementById('lives');
+const overlay=document.getElementById('overlay');
+const startBtn=document.getElementById('startBtn');
+
+let W,H,running=false,score=0,lives=3,best=+localStorage.getItem('nyvex_meteor_best')||0;
+bestEl.textContent=best;
+let meteors=[],particles=[],stars=[],t=0,spawnTimer=0;
+
+function resize(){
+  W=canvas.width=innerWidth;
+  H=canvas.height=innerHeight;
+  if(!stars.length){
+    for(let i=0;i<80;i++) stars.push({x:Math.random()*W,y:Math.random()*H,s:Math.random()*1.8+.3,a:Math.random()});
+  }
+}
+addEventListener('resize',resize);resize();
+
+function rand(a,b){return a+Math.random()*(b-a)}
+
+function spawnMeteor(){
+  const r=rand(18,42);
+  meteors.push({
+    x:rand(r,W-r),y:-r-10,r,
+    vy:rand(1.6,3.4)+(score/80),
+    vx:rand(-0.6,0.6),
+    rot:rand(0,Math.PI*2),
+    vr:rand(-0.05,0.05),
+    hp:r>32?2:1,
+    hue:rand(10,40)
+  });
+}
+
+function burst(x,y,n,hue){
+  for(let i=0;i<n;i++){
+    const a=Math.random()*Math.PI*2,sp=rand(1,5);
+    particles.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:rand(20,40),hue,s:rand(2,5)});
+  }
+}
+
+function hit(mx,my){
+  if(!running)return;
+  for(let i=meteors.length-1;i>=0;i--){
+    const m=meteors[i];
+    const dx=mx-m.x,dy=my-m.y;
+    if(dx*dx+dy*dy<=m.r*m.r){
+      m.hp--;
+      burst(m.x,m.y,8,m.hue);
+      if(m.hp<=0){
+        score+=m.r>32?25:10;
+        scoreEl.textContent=score;
+        burst(m.x,m.y,18,m.hue);
+        meteors.splice(i,1);
+        if(score>best){best=score;localStorage.setItem('nyvex_meteor_best',best);bestEl.textContent=best}
+      } else {
+        m.r*=0.75;
+      }
+      return;
+    }
+  }
+}
+
+canvas.addEventListener('pointerdown',e=>{
+  const r=canvas.getBoundingClientRect();
+  hit((e.clientX-r.left)*(canvas.width/r.width),(e.clientY-r.top)*(canvas.height/r.height));
+});
+
+function drawBg(){
+  const g=ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#0b0f1c');g.addColorStop(1,'#06080e');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  for(const s of stars){
+    ctx.globalAlpha=.3+s.a*.7;
+    ctx.fillStyle='#fff';
+    ctx.beginPath();ctx.arc(s.x,s.y,s.s,0,Math.PI*2);ctx.fill();
+  }
+  ctx.globalAlpha=1;
+}
+
+function drawMeteor(m){
+  ctx.save();
+  ctx.translate(m.x,m.y);ctx.rotate(m.rot);
+  // glow
+  ctx.beginPath();ctx.arc(0,0,m.r*1.4,0,Math.PI*2);
+  ctx.fillStyle=`rgba(255,${120+m.hue},40,.12)`;ctx.fill();
+  // body
+  const grd=ctx.createRadialGradient(-m.r*.3,-m.r*.3,2,0,0,m.r);
+  grd.addColorStop(0,`hsl(${m.hue},80%,55%)`);
+  grd.addColorStop(1,`hsl(${m.hue+10},70%,22%)`);
+  ctx.beginPath();ctx.arc(0,0,m.r,0,Math.PI*2);ctx.fillStyle=grd;ctx.fill();
+  // crater
+  ctx.fillStyle='rgba(0,0,0,.25)';
+  ctx.beginPath();ctx.arc(-m.r*.25,-m.r*.15,m.r*.22,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(m.r*.2,m.r*.25,m.r*.15,0,Math.PI*2);ctx.fill();
+  // trail
+  ctx.restore();
+  ctx.strokeStyle=`rgba(255,160,60,.35)`;
+  ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(m.x,m.y-m.r);ctx.lineTo(m.x-m.vx*8,m.y-m.r-18);ctx.stroke();
+}
+
+function loop(){
+  t++;
+  drawBg();
+  if(running){
+    spawnTimer--;
+    if(spawnTimer<=0){spawnMeteor();spawnTimer=Math.max(18,55-score/15)}
+    for(let i=meteors.length-1;i>=0;i--){
+      const m=meteors[i];
+      m.x+=m.vx;m.y+=m.vy;m.rot+=m.vr;
+      if(m.y-m.r>H){
+        meteors.splice(i,1);
+        lives--;livesEl.textContent=lives;
+        burst(m.x,H-10,12,20);
+        if(lives<=0) gameOver();
+      } else drawMeteor(m);
+    }
+  }
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.x+=p.vx;p.y+=p.vy;p.vy+=.08;p.life--;
+    if(p.life<=0){particles.splice(i,1);continue}
+    ctx.globalAlpha=Math.min(1,p.life/20);
+    ctx.fillStyle=`hsl(${p.hue},90%,60%)`;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fill();
+  }
+  ctx.globalAlpha=1;
+  requestAnimationFrame(loop);
+}
+
+function gameOver(){
+  running=false;
+  overlay.style.display='grid';
+  overlay.querySelector('h1').textContent='💥 Конец';
+  overlay.querySelector('p').innerHTML=`Очки: <b style="color:#c4b0ff">${score}</b><br>Рекорд: ${best}`;
+  startBtn.textContent='Ещё раз';
+}
+
+function start(){
+  score=0;lives=3;meteors=[];particles=[];spawnTimer=20;
+  scoreEl.textContent=0;livesEl.textContent=3;
+  running=true;overlay.style.display='none';
+}
+startBtn.onclick=start;
+loop();
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Mahjong</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:14px system-ui;min-height:100vh;display:grid;place-items:center}
+.wrap{padding:16px;text-align:center;max-width:640px}
+h1{margin:0 0 6px} .sub{color:#8b94a8;margin-bottom:12px}
+.bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+button,select{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;background:#1a2033;color:#fff}
+button.go{background:linear-gradient(135deg,#8d5cff,#6b3fd4)}
+#board{display:grid;gap:8px;justify-content:center}
+.tile{width:64px;height:72px;border-radius:12px;background:linear-gradient(160deg,#1e2438,#141a2a);border:2px solid rgba(255,255,255,.1);
+display:grid;place-items:center;font-size:32px;cursor:pointer;transition:.15s;user-select:none}
+.tile:hover{border-color:rgba(141,92,255,.5)}
+.tile.sel{border-color:#8d5cff;box-shadow:0 0 0 3px rgba(141,92,255,.35);transform:translateY(-4px)}
+.tile.gone{visibility:hidden;pointer-events:none}
+#msg{margin-top:12px;font-weight:800;color:#c4b0ff;min-height:24px}
+</style></head><body>
+<div class="wrap">
+  <h1>🀄 Маджонг</h1>
+  <div class="sub">Найди пары · сложность меняет число плиток и время</div>
+  <div class="bar">
+    <select id="diff">
+      <option value="easy">Лёгкий · 4 пары</option>
+      <option value="med" selected>Средний · 8 пар</option>
+      <option value="hard">Сложный · 12 пар</option>
+    </select>
+    <button class="go" id="new">Новая игра</button>
+  </div>
+  <div id="board"></div>
+  <div id="msg"></div>
+</div>
+<script>
+const SETS={
+  easy:['🀄','🎴','🀅','🀆'],
+  med:['🀄','🎴','🀅','🀆','🐉','🌸','⭐','🔥'],
+  hard:['🀄','🎴','🀅','🀆','🐉','🌸','⭐','🔥','💎','🌙','⚡','🍀']
+};
+let first=null,lock=false,left=0,t0=0;
+const board=document.getElementById('board'),msg=document.getElementById('msg');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function start(){
+  first=null;lock=false;msg.textContent='';
+  const d=document.getElementById('diff').value;
+  const syms=SETS[d];left=syms.length;
+  const tiles=shuffle([...syms,...syms]);
+  const cols=d==='easy'?4:d==='med'?4:6;
+  board.style.gridTemplateColumns=`repeat(${cols},64px)`;
+  board.innerHTML='';
+  t0=Date.now();
+  tiles.forEach((s,i)=>{
+    const el=document.createElement('div');el.className='tile';el.textContent=s;el.dataset.s=s;
+    el.onclick=()=>{
+      if(lock||el.classList.contains('gone')||el.classList.contains('sel'))return;
+      el.classList.add('sel');
+      if(!first){first=el;return}
+      lock=true;
+      if(first.dataset.s===el.dataset.s){
+        setTimeout(()=>{first.classList.add('gone');el.classList.add('gone');first=null;lock=false;left--;
+          if(left<=0)msg.textContent='🏆 Победа за '+Math.round((Date.now()-t0)/1000)+' сек';
+        },250);
+      } else {
+        setTimeout(()=>{first.classList.remove('sel');el.classList.remove('sel');first=null;lock=false},450);
+      }
+    };
+    board.appendChild(el);
+  });
+}
+document.getElementById('new').onclick=start;start();
+</script></body></html>

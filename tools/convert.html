@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конвертер</title><style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:16px}
+input,select{width:100%;font-size:16px;padding:12px;margin:6px 0;border-radius:12px;border:1px solid #333;background:#1a2233;color:#fff}
+a{color:#c4b5fd}</style></head><body>
+<a href="/">← Hub</a><h2>📐 Конвертер</h2>
+<select id="t"><option value="c">°C → °F</option><option value="f">°F → °C</option><option value="km">км → мили</option><option value="mi">мили → км</option></select>
+<input id="v" type="number" placeholder="Число">
+<p id="o" style="font-size:24px;font-weight:800"></p>
+<script>
+function go(){const n=+v.value,t=document.getElementById('t').value;let r='';
+  if(t==='c')r=(n*9/5+32).toFixed(2)+' °F'; if(t==='f')r=((n-32)*5/9).toFixed(2)+' °C';
+  if(t==='km')r=(n*0.621371).toFixed(3)+' mi'; if(t==='mi')r=(n/0.621371).toFixed(3)+' km';
+  o.textContent=r}
+v.oninput=go;t.onchange=go;
+</script></body></html>

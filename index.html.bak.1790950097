@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nyvex Hub</title>
+<meta name="theme-color" content="#8b5cf6">
+<style>
+:root{--bg:#0b1020;--card:#121a28;--line:#ffffff14;--accent:#8b5cf6;--text:#eef1ff;--muted:#9aa3b5}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
+header{margin-bottom:28px}
+h1{margin:0 0 6px;font-size:1.8rem}
+.sub{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card h2{margin:0;font-size:1.1rem}
+.card p{margin:0;color:var(--muted);font-size:.92rem;flex:1}
+a.btn{display:inline-block;text-align:center;text-decoration:none;background:var(--accent);color:#fff;
+  padding:11px 14px;border-radius:12px;font-weight:700}
+a.btn.alt{background:#ffffff12}
+a.btn.dead{opacity:.4;pointer-events:none}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+footer{margin-top:36px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Nyvex Hub</h1>
+  <p class="sub">Nyvex Technologies · Official Black Fox</p>
+</header>
+
+<div class="grid">
+  <div class="card">
+    <h2>🎮 Nyvex Clicker</h2>
+    <p>Telegram Mini App. Сохранения и игра — через бота.</p>
+    <div class="row">
+      <a class="btn" href="https://t.me/NyvexClickerBot" target="_blank" rel="noopener">Открыть бота</a>
+      <a class="btn alt" href="https://sociology-authorization-herein-male.trycloudflare.com" target="_blank" rel="noopener">Web (туннель)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💬 NyvexChat</h2>
+    <p>Чаты, профиль, магазин. Нужен запущенный сервер + туннель :8001.</p>
+    <div class="row">
+      <a class="btn" id="chat-link" href="https://t.me" target="_blank" rel="noopener">Открыть Chat</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🌐 Nyvex Browser</h2>
+    <p>Скачать для Linux. Windows/Android — скоро.</p>
+    <div class="row">
+      <a class="btn" href="download.html">Страница загрузки</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📦 Статус сервисов</h2>
+    <p>Clicker: порт 8003 · Chat: 8001 · Hub: 8088. Туннели cloudflared должны быть живы.</p>
+    <div class="row">
+      <a class="btn alt" href="https://sociology-authorization-herein-male.trycloudflare.com/health" target="_blank" rel="noopener">Clicker /health</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Почта: nyvex.technologies@gmail.com<br>
+  Кликер-бот: @NyvexClickerBot
+</footer>
+</div>
+</body>
+</html>

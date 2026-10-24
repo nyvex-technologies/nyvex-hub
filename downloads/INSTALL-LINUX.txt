@@ -1,0 +1,5 @@
+Nyvex Browser 0.2.0 — Linux
+1) tar -xzf nyvex-browser-linux-0.2.0.tar.gz -C ~
+2) sudo pacman -S --needed python python-gobject gtk3 webkit2gtk-4.1
+3) ~/.local/bin/nyvex-browser  (или см. install в README проекта)
+Движок: WebKit2. Автор: Nyvex Technologies · Official Black Fox

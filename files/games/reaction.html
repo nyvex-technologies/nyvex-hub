@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reaction</title>
+<style>
+body{margin:0;background:#080a12;color:#fff;font:15px system-ui;min-height:100vh;display:grid;place-items:center}
+#box{width:min(360px,90vw);height:280px;border-radius:20px;display:grid;place-items:center;cursor:pointer;
+background:#1a2033;border:2px solid rgba(141,92,255,.3);font-size:18px;font-weight:800;text-align:center;padding:20px}
+#box.ready{background:#2a2040} #box.go{background:#22c55e;color:#052e16} #box.early{background:#ff6275}
+#best{margin-top:12px;color:#c4b0ff;font-weight:900}
+</style></head><body>
+<div>
+  <div id="box">Нажми, чтобы начать</div>
+  <div id="best">Лучшее: —</div>
+</div>
+<script>
+const box=document.getElementById('box'),bestEl=document.getElementById('best');
+let state='idle',t0=0,timer=null,best=+localStorage.getItem('nyvex_react_best')||null;
+if(best)bestEl.textContent='Лучшее: '+best+' мс';
+box.onclick=()=>{
+  if(state==='idle'||state==='result'||state==='early'){
+    state='wait';box.className='ready';box.textContent='Жди зелёный...';
+    clearTimeout(timer);
+    timer=setTimeout(()=>{state='go';box.className='go';box.textContent='ЖМИ!';t0=performance.now()},1000+Math.random()*2500);
+  } else if(state==='wait'){
+    clearTimeout(timer);state='early';box.className='early';box.textContent='Рано! Нажми, чтобы снова';
+  } else if(state==='go'){
+    const ms=Math.round(performance.now()-t0);state='result';box.className='';
+    box.textContent=ms+' мс\nНажми ещё раз';
+    if(best===null||ms<best){best=ms;localStorage.setItem('nyvex_react_best',best);bestEl.textContent='Лучшее: '+best+' мс'}
+  }
+};
+</script></body></html>

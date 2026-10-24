@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#8b5cf6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nyvex">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#0a0e18">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Nyvex Hub</title>
+<style>
+:root{
+  --bg:#060912;--card:#121a28;--card2:#1a2436;--line:rgba(255,255,255,.1);
+  --text:#eef2ff;--muted:#8b97b0;--accent:#8b5cf6;--cyan:#22d3ee;--ok:#34d399;--warn:#fbbf24;
+  --radius:18px;--safe:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);
+  font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{padding-bottom:calc(70px + var(--safe));
+  background-image:radial-gradient(900px 400px at 10% -10%,rgba(139,92,246,.25),transparent),
+    radial-gradient(700px 300px at 100% 0%,rgba(34,211,238,.12),transparent)}
+.wrap{max-width:1000px;margin:0 auto;padding:14px 12px 20px}
+.hero{border:1px solid var(--line);border-radius:24px;padding:20px 16px;margin-bottom:14px;
+  background:linear-gradient(145deg,rgba(18,26,40,.95),rgba(12,16,28,.9))}
+.hero h1{margin:0;font-size:clamp(1.45rem,5vw,1.9rem);letter-spacing:.03em}
+.hero h1 span{background:linear-gradient(90deg,#c4b5fd,var(--cyan));-webkit-background-clip:text;color:transparent}
+.hero p{margin:8px 0 0;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;
+  background:rgba(255,255,255,.06);color:var(--muted)}
+.chip.ok{background:rgba(52,211,153,.12);color:var(--ok)}
+.chip.warn{background:rgba(251,191,36,.12);color:var(--warn)}
+.search input{width:100%;margin-top:12px;padding:13px 14px;border-radius:14px;border:1px solid var(--line);
+  background:var(--card2);color:var(--text);font-size:16px;outline:none}
+.search input:focus{border-color:rgba(139,92,246,.5)}
+.featured{display:grid;gap:10px;margin:14px 0}
+@media(min-width:700px){.featured{grid-template-columns:1.2fr 1fr}}
+.feat{position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);
+  padding:16px;min-height:120px;text-decoration:none;color:inherit;display:block}
+.feat.a{background:linear-gradient(135deg,#4c1d95,rgba(34,211,238,.25))}
+.feat.b{background:linear-gradient(135deg,#0f766e,rgba(139,92,246,.3))}
+.feat h3{margin:0 0 6px;font-size:1.15rem}
+.feat p{margin:0;opacity:.9;font-size:.9rem}
+.feat .go{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:10px;
+  background:rgba(0,0,0,.25);font-weight:800;font-size:13px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:9px 13px;border-radius:999px;border:1px solid var(--line);
+  background:var(--card);color:var(--muted);font-weight:700;font-size:12px;cursor:pointer}
+.tab.active{background:rgba(139,92,246,.22);color:#fff;border-color:rgba(139,92,246,.45)}
+.sec{margin:6px 0 8px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.card{display:flex;gap:12px;align-items:flex-start;padding:13px;border-radius:var(--radius);
+  background:var(--card);border:1px solid var(--line);text-decoration:none;color:inherit}
+.card:active{transform:scale(.985)}
+.icon{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;font-size:24px;flex-shrink:0;
+  background:linear-gradient(145deg,rgba(139,92,246,.4),rgba(34,211,238,.12))}
+.body{flex:1;min-width:0}
+.body h3{margin:0 0 3px;font-size:1rem}
+.body p{margin:0;color:var(--muted);font-size:.82rem}
+.meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.pill{font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--muted)}
+.pill.live{background:rgba(52,211,153,.15);color:var(--ok)}
+.pill.local{background:rgba(34,211,238,.12);color:var(--cyan)}
+.pill.soon{background:rgba(251,191,36,.12);color:var(--warn)}
+.btn{flex-shrink:0;align-self:center;padding:10px 12px;border-radius:12px;border:0;font-weight:800;font-size:12px;
+  color:#fff;background:linear-gradient(135deg,var(--accent),#6d28d9);text-decoration:none;min-height:40px;display:inline-flex;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:1.2rem}
+.stat span{font-size:11px;color:var(--muted)}
+.footer{margin-top:22px;padding:16px;border-radius:16px;border:1px solid var(--line);background:var(--card);
+  color:var(--muted);font-size:.85rem;text-align:center}
+.footer button{margin-top:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--card2);color:var(--text);font-weight:700;cursor:pointer}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;justify-content:space-around;
+  padding:6px 4px calc(6px + var(--safe));background:rgba(8,12,20,.94);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line)}
+.bnav button{flex:1;border:0;background:0;color:var(--muted);font-size:10px;font-weight:700;min-height:48px;cursor:pointer}
+.bnav button span{display:block;font-size:18px}
+.bnav button.active{color:#fff}
+.empty{text-align:center;color:var(--muted);padding:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>Nyvex <span>Hub</span></h1>
+    <p>Игры, приложения, утилиты и музыка — телефон и ПК, без рекламы.</p>
+    <div class="chips">
+      <span class="chip ok">Nyvex Technologies</span>
+      <span class="chip">Official Black Fox</span>
+      <span class="chip warn">без рекламы</span>
+    </div>
+    <div class="search"><input id="q" type="search" placeholder="Поиск: кликер, чат, сапёр, заметки…"></div>
+  </header>
+
+  <div class="featured" id="featured"></div>
+  <div class="stats" id="stats"></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="sec" id="secTitle">Каталог</div>
+  <div class="grid" id="list"></div>
+
+  <div class="footer">
+    <b style="color:var(--text)">Nyvex Hub</b><br>
+    Создатель: Nyvex · Official Black Fox<br>
+    nyvex.technologies@gmail.com<br>
+    <button type="button" id="editLinks">Обновить ссылки Chat / Clicker</button>
+  </div>
+</div>
+
+<nav class="bnav" id="bnav">
+  <button data-cat="all" class="active"><span>🏠</span>Все</button>
+  <button data-cat="games"><span>🎮</span>Игры</button>
+  <button data-cat="apps"><span>📱</span>Прилож.</button>
+  <button data-cat="tools"><span>🛠</span>Утилиты</button>
+  <button data-cat="music"><span>🎵</span>Музыка</button>
+</nav>
+
+<script>
+const LINKS = Object.assign({
+  chat: 'https://decreased-wallace-turtle-colon.trycloudflare.com',
+  universe: 'https://puerto-prints-measures-expansion.trycloudflare.com',
+}, JSON.parse(localStorage.getItem('nyvex_hub_links')||'{}'));
+
+const ITEMS = [
+  // online
+  {id:'universe',cat:'games',icon:'🦊',title:'Nyvex Clicker',desc:'Тапалка с облаком и событиями. Удобнее из Telegram-бота.',tags:['live','telegram'],href:()=>LINKS.universe,feat:true,featClass:'a'},
+  {id:'chat',cat:'apps',icon:'💬',title:'NyvexChat',desc:'Мессенджер: чаты, друзья, лента, ИИ, магазин.',tags:['live'],href:()=>LINKS.chat,feat:true,featClass:'b'},
+  // games
+  {id:'meteor',cat:'games',icon:'☄️',title:'Meteor Defense',desc:'Кликай метеориты, не дай им упасть.',tags:['local'],href:'/games/meteor.html'},
+  {id:'mines',cat:'games',icon:'💣',title:'Сапёр',desc:'Классика. Лёгкий / норма / ад.',tags:['local'],href:'/games/mines.html'},
+  {id:'tetris',cat:'games',icon:'🧱',title:'Тетрис',desc:'Фигуры, уровни, рекорд в браузере.',tags:['local'],href:'/games/tetris.html'},
+  {id:'snake',cat:'games',icon:'🐍',title:'Змейка',desc:'Расти и не врежься в себя.',tags:['local'],href:'/games/snake.html'},
+  {id:'pong',cat:'games',icon:'🏓',title:'Pong',desc:'Ракетка против стены / бота.',tags:['local'],href:'/games/pong.html'},
+  {id:'breakout',cat:'games',icon:'🧱',title:'Арканоид',desc:'Разбей все блоки.',tags:['local'],href:'/games/breakout.html'},
+  {id:'2048',cat:'games',icon:'🔢',title:'2048',desc:'Складывай плитки до 2048.',tags:['local'],href:'/games/2048.html'},
+  {id:'memory',cat:'games',icon:'🧠',title:'Memory',desc:'Найди пары карточек.',tags:['local'],href:'/games/memory.html'},
+  {id:'rps',cat:'games',icon:'✊',title:'КНБ',desc:'Камень, ножницы, бумага.',tags:['local'],href:'/games/rps.html'},
+  {id:'reaction',cat:'games',icon:'⚡',title:'Реакция',desc:'Проверь скорость реакции.',tags:['local'],href:'/games/reaction.html'},
+  // apps
+  {id:'notes',cat:'apps',icon:'📝',title:'Заметки',desc:'Быстрый блокнот, сохраняется локально.',tags:['local'],href:'/apps/notes.html'},
+  {id:'todo',cat:'apps',icon:'✅',title:'To-Do',desc:'Список дел с галочками.',tags:['local'],href:'/apps/todo.html'},
+  {id:'diary',cat:'apps',icon:'📔',title:'Дневник',desc:'Записи по датам.',tags:['local'],href:'/apps/diary.html'},
+  {id:'paint',cat:'apps',icon:'🎨',title:'Рисовалка',desc:'Холст пальцем или мышью.',tags:['local'],href:'/apps/paint.html'},
+  {id:'reader',cat:'apps',icon:'📖',title:'Читалка текста',desc:'Вставь текст — читай удобно.',tags:['local'],href:'/apps/reader.html'},
+  // tools
+  {id:'calc',cat:'tools',icon:'🧮',title:'Калькулятор',desc:'Обычный счёт.',tags:['local'],href:'/apps/calc.html'},
+  {id:'timer',cat:'tools',icon:'⏱️',title:'Таймер',desc:'Обратный отсчёт и секундомер.',tags:['local'],href:'/apps/timer.html'},
+  {id:'pass',cat:'tools',icon:'🔑',title:'Пароли',desc:'Генератор надёжных паролей.',tags:['local'],href:'/apps/password.html'},
+  {id:'convert',cat:'tools',icon:'📐',title:'Конвертер',desc:'См ↔ дюймы, °C ↔ °F и др.',tags:['local'],href:'/tools/convert.html'},
+  {id:'qr',cat:'tools',icon:'▦',title:'QR-текст',desc:'Сделай текст для QR (копируй).',tags:['local'],href:'/tools/qrtext.html'},
+  {id:'color',cat:'tools',icon:'🌈',title:'Цвета',desc:'Палитра HEX / RGB.',tags:['local'],href:'/tools/color.html'},
+  {id:'json',cat:'tools',icon:'{ }',title:'JSON pretty',desc:'Красиво оформить JSON.',tags:['local'],href:'/tools/json.html'},
+  {id:'uuid',cat:'tools',icon:'🆔',title:'UUID',desc:'Случайный идентификатор.',tags:['local'],href:'/tools/uuid.html'},
+  // music
+  {id:'musiclib',cat:'music',icon:'🎧',title:'Музыка Nyvex',desc:'Раздел треков (добавляй mp3 в /music/).',tags:['soon'],href:'/music/'},
+  {id:'metronome',cat:'music',icon:'🥁',title:'Метроном',desc:'Темп для репетиций.',tags:['local'],href:'/tools/metronome.html'},
+];
+
+const CATS = [
+  {id:'all',label:'Все'},
+  {id:'games',label:'Игры'},
+  {id:'apps',label:'Приложения'},
+  {id:'tools',label:'Утилиты'},
+  {id:'music',label:'Музыка'},
+];
+
+let cat = 'all';
+const $ = id => document.getElementById(id);
+
+function hrefOf(i){ return typeof i.href === 'function' ? i.href() : i.href; }
+function pills(tags){
+  return (tags||[]).map(t=>{
+    const c = t==='live'?'live':t==='local'?'local':t==='soon'?'soon':'';
+    const n = t==='live'?'онлайн':t==='local'?'офлайн':t==='soon'?'скоро':t==='telegram'?'Telegram':t;
+    return `<span class="pill ${c}">${n}</span>`;
+  }).join('');
+}
+
+function renderFeatured(){
+  const f = ITEMS.filter(i=>i.feat);
+  $('featured').innerHTML = f.map(i=>`
+    <a class="feat ${i.featClass||'a'}" href="${hrefOf(i)}" ${String(hrefOf(i)).startsWith('http')?'target="_blank" rel="noopener"':''}>
+      <h3>${i.icon} ${i.title}</h3>
+      <p>${i.desc}</p>
+      <span class="go">Открыть →</span>
+    </a>`).join('');
+}
+
+function renderStats(){
+  const n = ITEMS.length;
+  const g = ITEMS.filter(i=>i.cat==='games').length;
+  const a = ITEMS.filter(i=>i.cat==='apps'||i.cat==='tools').length;
+  $('stats').innerHTML = `
+    <div class="stat"><b>${n}</b><span>в каталоге</span></div>
+    <div class="stat"><b>${g}</b><span>игр</span></div>
+    <div class="stat"><b>${a}</b><span>прилож. и утилит</span></div>`;
+}
+
+function render(){
+  const q = ($('q').value||'').trim().toLowerCase();
+  const items = ITEMS.filter(i=>{
+    if(cat!=='all' && i.cat!==cat) return false;
+    if(!q) return true;
+    return (i.title+i.desc+(i.tags||[]).join(' ')).toLowerCase().includes(q);
+  });
+  $('secTitle').textContent = CATS.find(c=>c.id===cat)?.label || 'Каталог';
+  $('list').innerHTML = items.length ? items.map(i=>{
+    const h = hrefOf(i);
+    const ext = String(h).startsWith('http');
+    return `<div class="card">
+      <div class="icon">${i.icon}</div>
+      <div class="body"><h3>${i.title}</h3><p>${i.desc}</p><div class="meta">${pills(i.tags)}</div></div>
+      <a class="btn" href="${h}" ${ext?'target="_blank" rel="noopener"':''}>Открыть</a>
+    </div>`;
+  }).join('') : '<div class="empty">Ничего не найдено</div>';
+}
+
+$('tabs').innerHTML = CATS.map(c=>`<button class="tab ${c.id===cat?'active':''}" data-cat="${c.id}">${c.label}</button>`).join('');
+function setCat(id){
+  cat = id;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.cat===cat));
+  document.querySelectorAll('#bnav button').forEach(t=>t.classList.toggle('active', t.dataset.cat===cat));
+  render();
+}
+$('tabs').onclick = e=>{ const b=e.target.closest('[data-cat]'); if(b) setCat(b.dataset.cat); };
+$('bnav').onclick = e=>{ const b=e.target.closest('[data-cat]'); if(b) setCat(b.dataset.cat); };
+$('q').oninput = render;
+$('editLinks').onclick = ()=>{
+  const chat = prompt('NyvexChat URL', LINKS.chat||'');
+  const uni = prompt('Nyvex Clicker URL', LINKS.universe||'');
+  if(chat!=null && chat.trim()) LINKS.chat = chat.trim();
+  if(uni!=null && uni.trim()) LINKS.universe = uni.trim();
+  localStorage.setItem('nyvex_hub_links', JSON.stringify({chat:LINKS.chat,universe:LINKS.universe}));
+  renderFeatured(); render();
+  alert('Сохранено на этом устройстве');
+};
+
+renderFeatured(); renderStats(); render();
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js")}</script>
+</body>
+</html>

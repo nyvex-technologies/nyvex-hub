@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>To-Do — Nyvex</title>
+<style>body{margin:0;background:#0b1020;color:#eef;font-family:system-ui;padding:16px;max-width:480px;margin:0 auto}a{color:#a78bfa}
+input{flex:1;padding:10px;border-radius:10px;border:1px solid #333;background:#121a28;color:#fff}
+.row{display:flex;gap:8px} button{padding:10px 14px;border:0;border-radius:10px;background:#8b5cf6;color:#fff}
+li{list-style:none;padding:10px;margin:6px 0;background:#121a28;border-radius:10px;display:flex;justify-content:space-between;gap:8px}
+li.done span{text-decoration:line-through;opacity:.5}</style></head><body>
+<p><a href="/">← Hub</a></p><h1>✅ To-Do</h1>
+<div class="row"><input id="i" placeholder="Новая задача"><button onclick="add()">+</button></div><ul id="l"></ul>
+<script>
+let items=JSON.parse(localStorage.nyvex_todo||'[]');
+function save(){localStorage.nyvex_todo=JSON.stringify(items);render()}
+function add(){const v=i.value.trim();if(!v)return;items.push({t:v,d:false});i.value='';save()}
+function render(){l.innerHTML='';items.forEach((it,idx)=>{const li=document.createElement('li');if(it.d)li.className='done';
+  li.innerHTML=`<span>${it.t}</span>`;li.onclick=()=>{items[idx].d=!items[idx].d;save()};
+  const x=document.createElement('button');x.textContent='×';x.onclick=e=>{e.stopPropagation();items.splice(idx,1);save()};li.appendChild(x);l.appendChild(li)})}
+render();
+</script></body></html>
